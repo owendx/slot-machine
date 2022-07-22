@@ -1,0 +1,197 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(43, 93, 95);
+    display: grid;
+    height: 100vh;
+    justify-items: center;
+    align-items: center;
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+}
+
+#slot-machine-grid {
+    display: grid;
+    grid-gap: 1px;
+    width: 500px;
+    height: 600px;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+}
+
+#slot-machine-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 1px;
+    width: 500px;
+    height: 400px;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+}
+
+#slot-machine-inner > *, #slot-machine-grid > * {
+    /*background-color: white;*/
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+}
+
+#slot-machine-header, #slot-machine-payout-tray {
+    grid-column: span 3;
+}
+
+#handle {
+    grid-row: span 2;
+}
+
+#slot-machine-grid {
+    grid-template-areas:
+    'slot-machine-top slot-machine-top slot-machine-top'
+    'slotWindow1 slotWindow2 slotWindow3'
+    'slot-machine-bottom slot-machine-bottom slot-machine-bottom';
+
+}
+
+#slot-machine-top {
+    grid-area: slot-machine-top;
+}
+#slot-machine-handle {
+    grid-area: slot-machine-handle;
+}
+#slot-machine-bottom {
+    grid-area: slot-machine-bottom;
+}
+#slotWindow1 {
+    grid-area: slotWindow1;
+}
+#slotWindow2 {
+    grid-area: slotWindow2;
+}
+#slotWindow3 {
+    grid-area: slotWindow3;
+}
+
+
+#slot-machine-grid > * {
+    /*background-color: white;*/
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+}
+
+
+
+#slot-machine-title {
+    color: white;
+    text-align: center;
+    font-size: 19px;
+}
+
+#console {
+    height: 50px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid red;
+    margin: 20px auto;
+}
+
+#score {
+    background-color: white;
+    height: 60px;
+    width: 90px;
+    border: 2px solid green;
+    margin: 20px 20px;
+}
+
+#bet-window {
+    background-color: white;
+    height: 50px;
+    width: 90px;
+    border: 2px solid red;
+    margin: 20px 20px;
+}
+
+#winnings {
+    background-color: green;
+    color: white;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 4px;
+}
+
+#bet {
+    background-color: red ;
+    color: white;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 4px;
+}
+
+.flex-ctr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+#console {
+    color: red;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 10px;
+}
+
+
+#screens {
+    display: flex;
+}
+
+#payout-button {
+    background-color: green;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+    padding: 4px;
+    border-radius: 5px;
+    margin: 10px;
+    height: 65px;
+    width: 300px;
+}
+
+#spin-button {
+    background-color: red;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 40px;
+    padding: 4px;
+    border-radius: 5px;
+    margin: 10px;
+    height: 75px;
+    width: 300px;
+}
+
+#slotWindow1, #slotWindow2, #slotWindow3 {
+    height: 200px;
+}
+
+#slot-machine-top {
+    height: 300px;
+}
+
+#slot-machine-bottom {
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
