@@ -1,4 +1,4 @@
-#Browser-Based Game: Slot Machine
+# Browser-Based Game: Slot Machine
 **Author: Oluwaseun Talabi**
 
 A slot machine powered by HTML, CSS and Javascript.
