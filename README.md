@@ -1,7 +1,7 @@
-# Project 1 - Browser-Based Game: Slot Machine
+#Browser-Based Game: Slot Machine
 **Author: Oluwaseun Talabi**
 
-For Project 1, I've decided to build a slot machine powered by HTML, CSS and Javascript. 
+A slot machine powered by HTML, CSS and Javascript.
 
 ### Contents
 
