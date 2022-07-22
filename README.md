@@ -10,7 +10,7 @@ A slot machine powered by HTML, CSS and Javascript.
 - Pseudocode
 
 ### Wireframe
-<iframe style="border:none" width="800" height="450" src="https://whimsical.com/embed/YQNJ3geosQsdeWZVZGAAdx"></iframe>
+<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-wireframe.png" />
 
 [Link to view wireframe on Whimsical: https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx](https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx)
 
