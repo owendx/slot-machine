@@ -14,8 +14,8 @@ A slot machine powered by HTML, CSS and Javascript.
 <img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-wireframe.png" />
 
 [Link to view wireframe on Whimsical: https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx](https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx)
-
-### Game Flow
+ 
+### Game Flow 
 <img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-game-flow.png" />
 
 ### Symbol List
