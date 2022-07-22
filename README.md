@@ -6,6 +6,7 @@ A slot machine powered by HTML, CSS and Javascript.
 ### Contents
 
 - Wireframe
+- Game Flow
 - Slot Machine Description
 - Pseudocode
 
@@ -13,6 +14,9 @@ A slot machine powered by HTML, CSS and Javascript.
 <img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-wireframe.png" />
 
 [Link to view wireframe on Whimsical: https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx](https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx)
+
+### Game Flow
+<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-game-flow.png" />
 
 ### Symbol List
 There are **7 symbols** that may appear in the reels when the slot machine is played:
