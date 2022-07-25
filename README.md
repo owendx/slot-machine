@@ -16,11 +16,11 @@ A slot machine powered by HTML, CSS and Javascript.
 [Link to view wireframe on Whimsical: https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx](https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx)
  
 ### Game Flow 
-<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-symbols-3.png" />
+<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-game-flow-1.png" />
 
 ### Symbol List
 There are **9 symbols** that may appear in the reels when the slot machine is played:
-<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-symbols-2.png" />
+<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-symbols-3.png" />
 
 ### Slot Machine Description
 
