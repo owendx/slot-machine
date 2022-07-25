@@ -16,15 +16,15 @@ A slot machine powered by HTML, CSS and Javascript.
 [Link to view wireframe on Whimsical: https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx](https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx)
  
 ### Game Flow 
-<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-game-flow-1.png" />
+<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-symbols-3.png" />
 
 ### Symbol List
-There are **7 symbols** that may appear in the reels when the slot machine is played:
+There are **9 symbols** that may appear in the reels when the slot machine is played:
 <img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-symbols-2.png" />
 
 ### Slot Machine Description
 
-The slot machine is rendered on the page using a design powered by CSS Grid and Flexbox. The slot machine features 4 reels loaded with 7 symbols. 
+The slot machine is rendered on the page using a design powered by CSS Grid and Flexbox. The slot machine features 4 reels loaded with 9 symbols. 
 
 When the page is first loaded, the buttons and reels are not initially active. The live console/info box prompts the user to enter their name, via the textbox at the bottom of the machine.
 
