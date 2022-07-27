@@ -18,336 +18,459 @@
 /*----- functions -----*/
 
 
+//settings for the slot machine
+let numberOfReels = 3;
 
-// we need formatted HTML strings for each symbol so we can append them to the DOM correctly
-// lets set up an array and function to store the formatted HTML strings
-let formattedHTMLImgStrings = [];
-function prepareSymbols(){
-    // Array to store all symbols used in reels
-    let symbols = [];
-
-// Create HTML Image Elements from images and push them into symbols array
-    let image7 = new Image(50, 50);
-    image7.src = 'imgs/7.png';
-    symbols.push(image7);
-
-    let bar = new Image(50, 50);
-    bar.src = 'imgs/bar.png';
-    symbols.push(bar);
-
-    let clover = new Image(50, 50);
-    clover.src = 'imgs/clover.png';
-    symbols.push(clover);
-
-    let diamond = new Image(50, 50);
-    diamond.src = 'imgs/diamond.png';
-    symbols.push(diamond);
-
-    let heart = new Image(50, 50);
-    heart.src = 'imgs/heart.png';
-    symbols.push(heart);
-
-    let shamrock = new Image(50, 50);
-    shamrock.src = 'imgs/club.png';
-    symbols.push(shamrock);
-
-    let spade = new Image(50, 50);
-    spade.src = 'imgs/spade.png';
-    symbols.push(spade);
-
-    let cherry = new Image(50, 50);
-    cherry.src = 'imgs/cherry.png';
-    symbols.push(cherry);
-
-    let bell = new Image(50, 50);
-    bell.src = 'imgs/bell.png';
-    symbols.push(bell);
-
-
-// We confirm that the symbol names can be retrieved from the src names, so lets set up a function for that
-    function imgTemplateBuilder(img) {
-        let nameOfSymbol = img.currentSrc.split(/[\\/]/).pop().replace(/\.[^/.]+$/, "");
-        // return `<img src="${img.src}" alt="${img.alt}" width="${img.width}" height="${img.height}" id="${nameOfSymbol}">`;
-        return `<img src="${img.src}" alt="${img.alt}" width="85" height="85" id="${nameOfSymbol}">`; // changed the width and height to 75px
-    }
-
-// lets push the formatted HTML strings to the array
-    for (let i =0; i < symbols.length; i++) {
-        formattedHTMLImgStrings.push(imgTemplateBuilder(symbols[i]));
-    }
-
+//create 3 divs with class slot-machine-window and append them to the div with class slot-machine
+function createSlotMachineReels() {
+    var slotMachine = document.getElementById("slot-machine");
+    var slotMachineReel = document.createElement("div");
+    slotMachineReel.className = "slot-machine-reel";
+    slotMachine.appendChild(slotMachineReel);
 }
-prepareSymbols()
 
-// lets store all the divs with class .reelWindow into a variable called reelWindows
-const reelWindows = document.querySelectorAll('.reelWindow');
-
-// function that runs once the page loads
-function initializer() {
-
-    function generateDisplays() {
-        // lets create an array to store the formatted HTML strings for the displays
-        let symbolHTML = [];
-
-        // first we declare an empty array and push the formatted HTML symbols into it
-        const container = [];
-        for (const symbol of formattedHTMLImgStrings) {
-            container.push(symbol);
-        }
-
-        // here is a function that can shuffle the symbols in the container array
-        function shuffle([...arr]) {
-            let m = arr.length;
-            while (m) {
-                const i = Math.floor(Math.random() * m--);
-                [arr[m], arr[i]] = [arr[i], arr[m]];
-            }
-            return arr;
-        }
-        // now we can call the function to shuffle the symbols and store the result in a new array
-        symbolHTML.push(...shuffle(container));
-
-        // now we can set the initial view of the reel windows by pushing the shuffled symbols into the displays
-        // we need to push the formatted HTML strings into the display divs under each reelWindow
-        // reelWindows is an array of divs with class .reelWindow, which has already been declared globally
-        // now lets iterate over the reelWindows and push the formatted HTML strings into each display
-        reelWindows.forEach(reelWindow => {
-            let displaysOnThisReel = reelWindow.querySelectorAll('.display');
-
-            let shuffledSymbols = shuffle(symbolHTML); // we must shuffle the symbols again before we push them into the displays
-            for (let i = 0; i < displaysOnThisReel.length; i++) {
-                displaysOnThisReel[i].innerHTML = shuffledSymbols[i];
-            }
-            let duplicatedReels = reelWindow.cloneNode(true);
-            let duplicatedDisplays = duplicatedReels.querySelectorAll('.display');
-
-            // console.log('these are the duplicated displays');
-            // console.log(duplicatedDisplays);
-            reelWindow.append(...duplicatedDisplays);
-
-            let duplicatedReels2 = reelWindow.cloneNode(true);
-            let duplicatedDisplays2 = duplicatedReels2.querySelectorAll('.display');
-            reelWindow.append(...duplicatedDisplays2);
-
-        });
-
-        // now lets gather all the displays generated so far and put them into a variable called reelDisplays
-        const reelDisplays = document.querySelectorAll('.display');
-
-        // we need to assign id numbers to each display so we can reference them later
-        for (let i = 0; i < reelDisplays.length; i++) {
-            reelDisplays[i].id = `display${i + 1}`;
-        }
-
+// append a div with a class named 'window' to each div with class 'slot-machine-reel'
+function createSlotMachineWindows() {
+    var slotMachineReels = document.getElementsByClassName("slot-machine-reel");
+    for (var i = 0; i < slotMachineReels.length; i++) {
+        var slotMachineWindow = document.createElement("div");
+        slotMachineWindow.className = "slot-machine-window";
+        slotMachineReels[i].appendChild(slotMachineWindow);
     }
-    generateDisplays()
-
-    // function to handle translation animations of the reel windows/displays
-    function translateReelWindow (){
-        document.querySelectorAll('.display').forEach(display => {
-            display.classList.add('translate');
-        })
-    }
-
-    // lets set up functions to handle the blur animations of the reel windows/displays
-    function blurDisplays() {
-        document.querySelectorAll('.display').forEach(display => {
-            display.classList.add('blur');
-        })
-    }
-
-    function addEventListenersToDisplays() {
-        // lets add event listeners to the reel displays
-        document.querySelector('#spin').addEventListener('click', spin);
-        document.querySelector('#spin').addEventListener('click', translateReelWindow);
-        document.querySelector('#spin').addEventListener('click', blurDisplays);
-
-    }
-    addEventListenersToDisplays()
-
-
 }
-initializer()
 
-// variable to count spin counts
-let spinCount = 0;
 
+// run createSlotMachineReels function for the numberOfReels times
+for (var i = 0; i < numberOfReels; i++) {
+    createSlotMachineReels();
+}
+
+// attach the windows to the reels
+createSlotMachineWindows();
+
+// append a div with class 'displaySet' to each div with class 'slot-machine-window'
+function createDisplaySets() {
+    var slotMachineWindows = document.getElementsByClassName("slot-machine-window");
+    for (var i = 0; i < slotMachineWindows.length; i++) {
+        var displaySet = document.createElement("div");
+        displaySet.className = "displaySet";
+        slotMachineWindows[i].appendChild(displaySet);
+    }
+}
+
+// attatch the display sets to the windows
+createDisplaySets();
+
+// append a div with class 'displaySetDuplicate' to each div with class 'slot-machine-window'
+function createDisplaySetsDuplicates() {
+    var slotMachineWindows = document.getElementsByClassName("slot-machine-window");
+    for (var i = 0; i < slotMachineWindows.length; i++) {
+        var displaySetDuplicate = document.createElement("div");
+        displaySetDuplicate.className = "displaySetDuplicate";
+        slotMachineWindows[i].appendChild(displaySetDuplicate);
+    }
+}
+
+// attach the display set duplicates to the windows
+createDisplaySetsDuplicates();
+
+// create 9 divs with class 'display' and append them to each div with class 'displaySet'
+function createDisplays() {
+    var displaySets = document.getElementsByClassName("displaySet");
+    for (var i = 0; i < displaySets.length; i++) {
+        for (var j = 0; j < 9; j++) {
+            var display = document.createElement("div");
+            display.className = `display display${j+1}`;
+            // display.className = `display${j+1}`;
+            displaySets[i].appendChild(display);
+        }
+    }
+}
+
+createDisplays()
+
+// create 9 divs with class 'display' and append them to each div with class 'displaySetDuplicate'
+function createDisplaysDuplicates() {
+    var displaySets = document.getElementsByClassName("displaySetDuplicate");
+    for (var i = 0; i < displaySets.length; i++) {
+        for (var j = 0; j < 9; j++) {
+            var display = document.createElement("div");
+            display.className = `display display${j+1}`;
+            // display.id = `display${j+1}`;
+            displaySets[i].appendChild(display);
+        }
+    }
+}
+
+createDisplaysDuplicates()
+
+// generate an array with the numbers 1-9
+function generateRandomNumbers() {
+    var randomNumbers = [];
+    for (var i = 0; i < 9; i++) {
+        randomNumbers.push(i + 1);
+    }
+    return randomNumbers;
+}
+
+// shuffle the array
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+console.log(shuffle(generateRandomNumbers()));
+
+
+// store all the divs with class 'slot-machine-window to a variable
+let slotMachineWindows = document.getElementsByClassName("slot-machine-window");
+
+// loop through slotMachineWindows and add a random number to each div under slotMachineWindows
+function addRandomNumbers() {
+    for (var i = 0; i < slotMachineWindows.length; i++) {
+        let setOfNumbers = shuffle(generateRandomNumbers());
+        // let setOfNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // used for unshuffled number testing
+        // count the number of divs with class 'display' in each div with class 'slot-machine-window'
+        let numberOfDisplays = slotMachineWindows[i].getElementsByClassName("display").length;
+        // assign each value from setOfNumbers to each div with class 'display'
+        for (var j = 0; j < numberOfDisplays; j++) {
+            slotMachineWindows[i].getElementsByClassName("display")[j].innerHTML = setOfNumbers[j % setOfNumbers.length];
+        }
+    }}
+addRandomNumbers();
+
+
+
+// when the 'spin' button is clicked, the class 'displaySetSpin' is added to each div with class 'displaySet' and
+// the class 'displaySetDuplicateSpin' is added to each div with class 'displaySetDuplicate'
 function spin() {
-    let allRows = [];
-
-    if (true) {
-        // now lets build a function that checks the values of each row
-        function checkMatch() {
-            function symbolPusher() {
-                // this is the first row of displays
-                let visibleDisplay1 = document.querySelector('#display5');
-                let visibleDisplay2 = document.querySelector('#display41');
-                let visibleDisplay3 = document.querySelector('#display77');
-
-                // this is the second row of displays
-                let visibleDisplay4 = document.querySelector('#display6');
-                let visibleDisplay5 = document.querySelector('#display42');
-                let visibleDisplay6 = document.querySelector('#display78');
-
-                // this is the third row of displays
-                let visibleDisplay7 = document.querySelector('#display7');
-                let visibleDisplay8 = document.querySelector('#display43');
-                let visibleDisplay9 = document.querySelector('#display79');
-
-                // this is the fourth row of displays
-                let visibleDisplay10 = document.querySelector('#display8');
-                let visibleDisplay11 = document.querySelector('#display44');
-                let visibleDisplay12 = document.querySelector('#display80');
-
-
-                // lets declare an array to store the values of each row of displays
-                let firstRow = [];
-                let secondRow = [];
-                let thirdRow = [];
-                let fourthRow = [];
-
-                // push the innerHTML values of the first row of displays into the array
-                firstRow.push(visibleDisplay1.innerHTML);
-                firstRow.push(visibleDisplay2.innerHTML);
-                firstRow.push(visibleDisplay3.innerHTML);
-
-                // push the innerHTML values of the second row of displays into the array
-                secondRow.push(visibleDisplay4.innerHTML);
-                secondRow.push(visibleDisplay5.innerHTML);
-                secondRow.push(visibleDisplay6.innerHTML);
-
-                // push the innerHTML values of the third row of displays into the array
-                thirdRow.push(visibleDisplay7.innerHTML);
-                thirdRow.push(visibleDisplay8.innerHTML);
-                thirdRow.push(visibleDisplay9.innerHTML);
-
-                // push the innerHTML values of the fourth row of displays into the array
-                fourthRow.push(visibleDisplay10.innerHTML);
-                fourthRow.push(visibleDisplay11.innerHTML);
-                fourthRow.push(visibleDisplay12.innerHTML);
-
-
-                // this function can convert the innerHTML values of the displays into the split off values of the symbols
-                function innerHTMLSymbolConverter(innerHTML) {
-                    return innerHTML.split(/[\\/]/).pop().replace(/\.[^/.]+$/, "");
-                }
-
-                // lets convert the innerHTML of the firstRow array into symbols iterating over them with the innerHTMLSymbolConverter function
-                firstRow.forEach((display, index) => {
-                    firstRow[index] = innerHTMLSymbolConverter(display);
-                })
-                // lets convert the innerHTML of the secondRow array into symbols iterating over them with the innerHTMLSymbolConverter function
-                secondRow.forEach((display, index) => {
-                    secondRow[index] = innerHTMLSymbolConverter(display);
-                })
-                // lets convert the innerHTML of the thirdRow array into symbols iterating over them with the innerHTMLSymbolConverter function
-                thirdRow.forEach((display, index) => {
-                    thirdRow[index] = innerHTMLSymbolConverter(display);
-                })
-                // lets convert the innerHTML of the fourthRow array into symbols iterating over them with the innerHTMLSymbolConverter function
-                fourthRow.forEach((display, index) => {
-                    fourthRow[index] = innerHTMLSymbolConverter(display);
-                })
-
-                // lets push the rows of displays into an array to make it easier to check if all the displays match
-
-                allRows.push(firstRow);
-                allRows.push(secondRow);
-                allRows.push(thirdRow);
-                allRows.push(fourthRow);
-                // this function checks if all elements in an array match
-                function allAreEqual(array) {
-                    return array.every(element => {
-                        if (element === array[0]) {
-                            return true;
-                        }
-                    });
-                }
-
-
-
-                // now lets check if the symbols match using allAreEqual function by iterating over allRows array
-                for (const row of allRows) {
-                    let rowIndex = Object.keys({
-                        0: firstRow,
-                        1: secondRow,
-                        2: thirdRow,
-                        3: fourthRow
-                    })[allRows.indexOf(row)];
-                    rowIndex = Number(rowIndex);
-                    let rowNumber = rowIndex + 1;
-                    console.log(rowNumber);
-                    console.log(row);
-                    if (allAreEqual(row)) {
-                        console.log(`YOU HAVE A MATCH!`)
-                        matchFound(rowNumber);
-                        // return true;
-                    } else {
-                        console.log(`NO MATCH`)
-                    }
-                    console.log(`\n`)
-                }
-
-                // function that triggers when a match is found
-                function matchFound(rowNumber) {
-                    // add a match class to the row of displays that matched
-                    if (rowNumber === 1) {
-                        document.querySelector('#display5').classList.add('match');
-                        document.querySelector('#display41').classList.add('match');
-                        document.querySelector('#display77').classList.add('match');
-                    } else if (rowNumber === 2) {
-                        document.querySelector('#display6').classList.add('match');
-                        document.querySelector('#display42').classList.add('match');
-                        document.querySelector('#display78').classList.add('match');
-                    } else if (rowNumber === 3) {
-                        document.querySelector('#display7').classList.add('match');
-                        document.querySelector('#display43').classList.add('match');
-                        document.querySelector('#display79').classList.add('match');
-                    } else if (rowNumber === 4) {
-                        document.querySelector('#display8').classList.add('match');
-                        document.querySelector('#display44').classList.add('match');
-                        document.querySelector('#display80').classList.add('match');
-                    }
-                }
-            }
-            symbolPusher();
-
-        }
-        checkMatch();
-        spinCount = spinCount + 1;
+    var displaySets = document.getElementsByClassName("displaySet");
+    var displaySetsDuplicate = document.getElementsByClassName("displaySetDuplicate");
+    // add the class 'displaySetSpinHigh' to each div with class 'display' under each div with class 'displaySet'
+    for (var i = 0; i < displaySets.length; i++) {
+        displaySets[i].classList.add("displaySetSpin");
+    }
+    // add the class 'displaySetDuplicateSpinHigh' to each div with class 'display' under each div with class 'displaySetDuplicate'
+    for (var i = 0; i < displaySetsDuplicate.length; i++) {
+        displaySetsDuplicate[i].classList.add("displaySetDuplicateSpin");
     }
 
-    else {
-
-
-        console.log(spinCount);
-        console.log('YOU ALREADY PLAYED');
-        console.log('WE ARE SETTING UP THE NEXT ROUND...')
-
-        let previousSpins = [];
-        // function to copy the symbols from the previous spin to the current spin
-        function copySymbols() {
-            // lets get the symbols from the previous spin and store them in an array
-            let previousDisplays = document.querySelectorAll('.display');
-            previousDisplays.forEach(display => {
-                // console.log(display.innerHTML);
-                previousSpins.push(display.innerHTML);
-            })
-
-            // lets now copy the symbols from the previous spin to the current spin
-            for (let i = 0; i < previousSpins.length; i++) {
-                if (i + 12 < 108) {
-                    let targetDisplay = document.querySelectorAll('.display')[i + 12]; // target the display that is 12 positions after the previous spin
-                    targetDisplay.innerHTML = previousSpins[i];
-                    console.log(targetDisplay.innerHTML);
-                }
-                else {
-                    console.log('ERROR')
-                }
-
+    // on animationend, remove the class 'displaySetSpinHigh' from each div with class 'display' under each div with class 'displaySet'
+    for (var i = 0; i < displaySets.length; i++) {
+        displaySets[i].addEventListener("animationend", function() {
+                this.classList.remove("displaySetSpin");
             }
-        }
-        copySymbols();
-        spinCount = 0;
+        );
+    }
+    // on animationend, remove the class 'displaySetDuplicateSpinHigh' from each div with class 'display' under each div with class 'displaySetDuplicate'
+    for (var i = 0; i < displaySetsDuplicate.length; i++) {
+        displaySetsDuplicate[i].addEventListener("animationend", function() {
+                this.classList.remove("displaySetDuplicateSpin");
+            }
+        );
+    }
+
+
+}
+
+// add class .nudgeReel to a random div with class 'slot-machine-window'
+function nudgeReel() {
+    var slotMachineWindows = document.getElementsByClassName("slot-machine-window");
+    // store the classes '.nudgeReelLow', '.nudgeReelMedium', and '.nudgeReelHigh' in an array
+    var nudgeReelSpeeds = ["nudgeReelLow", "nudgeReelMed", "nudgeReelHigh"];
+    // assign a random index from nudgeReelSpeeds to a class on each div with class 'slot-machine-window'
+    for (var i = 0; i < slotMachineWindows.length; i++) {
+        slotMachineWindows[i].classList.add(nudgeReelSpeeds[Math.floor(Math.random() * nudgeReelSpeeds.length)]);
+    }
+
+    // on transitionend, run the function shiftDisplays()
+    for (var i = 0; i < slotMachineWindows.length; i++) {
+        slotMachineWindows[i].addEventListener("transitionend", shiftDisplays);
     }
 }
+
+
+
+function shiftDisplaysBy3(displaySet) {
+    // remap the innerText of each div with class 'display' to a corresponding div with class 'display' under the div with class 'displaySet'
+    // retrieve the innerText of div with class 'display1' under the div with class 'displaySet'
+    var display1 = displaySet.getElementsByClassName("display1")[0].innerText;
+    // retrieve the innerText of div with class 'display2' under the div with class 'displaySet'
+    var display2 = displaySet.getElementsByClassName("display2")[0].innerText;
+    // retrieve the innerText of div with class 'display3' under the div with class 'displaySet'
+    var display3 = displaySet.getElementsByClassName("display3")[0].innerText;
+    // retrieve the innerText of div with class 'display4' under the div with class 'displaySet'
+    var display4 = displaySet.getElementsByClassName("display4")[0].innerText;
+    // retrieve the innerText of div with class 'display5' under the div with class 'displaySet'
+    var display5 = displaySet.getElementsByClassName("display5")[0].innerText;
+    // retrieve the innerText of div with class 'display6' under the div with class 'displaySet'
+    var display6 = displaySet.getElementsByClassName("display6")[0].innerText;
+    // retrieve the innerText of div with class 'display7' under the div with class 'displaySet'
+    var display7 = displaySet.getElementsByClassName("display7")[0].innerText;
+    // retrieve the innerText of div with class 'display8' under the div with class 'displaySet'
+    var display8 = displaySet.getElementsByClassName("display8")[0].innerText;
+    // retrieve the innerText of div with class 'display9' under the div with class 'displaySet'
+    var display9 = displaySet.getElementsByClassName("display9")[0].innerText;
+
+    // clear the innerText values of each div with class 'display' under the div with class 'displaySet'
+    displaySet.getElementsByClassName("display1")[0].innerText = "";
+    displaySet.getElementsByClassName("display2")[0].innerText = "";
+    displaySet.getElementsByClassName("display3")[0].innerText = "";
+    displaySet.getElementsByClassName("display4")[0].innerText = "";
+    displaySet.getElementsByClassName("display5")[0].innerText = "";
+    displaySet.getElementsByClassName("display6")[0].innerText = "";
+    displaySet.getElementsByClassName("display7")[0].innerText = "";
+    displaySet.getElementsByClassName("display8")[0].innerText = "";
+    displaySet.getElementsByClassName("display9")[0].innerText = "";
+
+    // assign the innerText of display9 to the innerText of div with class 'display6'
+    displaySet.getElementsByClassName("display6")[0].innerText = display9;
+    // assign the innerText of display8 to the innerText of div with class 'display5'
+    displaySet.getElementsByClassName("display5")[0].innerText = display8;
+    // assign the innerText of display7 to the innerText of div with class 'display4'
+    displaySet.getElementsByClassName("display4")[0].innerText = display7;
+    // assign the innerText of display6 to the innerText of div with class 'display3'
+    displaySet.getElementsByClassName("display3")[0].innerText = display6;
+    // assign the innerText of display5 to the innerText of div with class 'display2'
+    displaySet.getElementsByClassName("display2")[0].innerText = display5;
+    // assign the innerText of display4 to the innerText of div with class 'display1'
+    displaySet.getElementsByClassName("display1")[0].innerText = display4;
+    // assign the innerText of display3 to the innerText of div with class 'display9'
+    displaySet.getElementsByClassName("display9")[0].innerText = display3;
+    // assign the innerText of display2 to the innerText of div with class 'display8'
+    displaySet.getElementsByClassName("display8")[0].innerText = display2;
+    // assign the innerText of display1 to the innerText of div with class 'display7'
+    displaySet.getElementsByClassName("display7")[0].innerText = display1;
+
+
+}
+
+
+
+function shiftDisplaysBy5(displaySet) {
+    // remap the innerText of each div with class 'display' to a corresponding div with class 'display' under the div with class 'displaySet'
+    // retrieve the innerText of div with class 'display1' under the div with class 'displaySet'
+    var display1 = displaySet.getElementsByClassName("display1")[0].innerText;
+    // retrieve the innerText of div with class 'display2' under the div with class 'displaySet'
+    var display2 = displaySet.getElementsByClassName("display2")[0].innerText;
+    // retrieve the innerText of div with class 'display3' under the div with class 'displaySet'
+    var display3 = displaySet.getElementsByClassName("display3")[0].innerText;
+    // retrieve the innerText of div with class 'display4' under the div with class 'displaySet'
+    var display4 = displaySet.getElementsByClassName("display4")[0].innerText;
+    // retrieve the innerText of div with class 'display5' under the div with class 'displaySet'
+    var display5 = displaySet.getElementsByClassName("display5")[0].innerText;
+    // retrieve the innerText of div with class 'display6' under the div with class 'displaySet'
+    var display6 = displaySet.getElementsByClassName("display6")[0].innerText;
+    // retrieve the innerText of div with class 'display7' under the div with class 'displaySet'
+    var display7 = displaySet.getElementsByClassName("display7")[0].innerText;
+    // retrieve the innerText of div with class 'display8' under the div with class 'displaySet'
+    var display8 = displaySet.getElementsByClassName("display8")[0].innerText;
+    // retrieve the innerText of div with class 'display9' under the div with class 'displaySet'
+    var display9 = displaySet.getElementsByClassName("display9")[0].innerText;
+
+    // clear the innerText values of each div with class 'display' under the div with class 'displaySet'
+    displaySet.getElementsByClassName("display1")[0].innerText = "";
+    displaySet.getElementsByClassName("display2")[0].innerText = "";
+    displaySet.getElementsByClassName("display3")[0].innerText = "";
+    displaySet.getElementsByClassName("display4")[0].innerText = "";
+    displaySet.getElementsByClassName("display5")[0].innerText = "";
+    displaySet.getElementsByClassName("display6")[0].innerText = "";
+    displaySet.getElementsByClassName("display7")[0].innerText = "";
+    displaySet.getElementsByClassName("display8")[0].innerText = "";
+    displaySet.getElementsByClassName("display9")[0].innerText = "";
+
+    // assign the innerText of display9 to the innerText of div with class 'display4'
+    displaySet.getElementsByClassName("display4")[0].innerText = display9;
+    // assign the innerText of display8 to the innerText of div with class 'display3'
+    displaySet.getElementsByClassName("display3")[0].innerText = display8;
+    // assign the innerText of display7 to the innerText of div with class 'display2'
+    displaySet.getElementsByClassName("display2")[0].innerText = display7;
+    // assign the innerText of display6 to the innerText of div with class 'display1'
+    displaySet.getElementsByClassName("display1")[0].innerText = display6;
+    // assign the innerText of display5 to the innerText of div with class 'display9'
+    displaySet.getElementsByClassName("display9")[0].innerText = display5;
+    // assign the innerText of display4 to the innerText of div with class 'display8'
+    displaySet.getElementsByClassName("display8")[0].innerText = display4;
+    // assign the innerText of display3 to the innerText of div with class 'display7'
+    displaySet.getElementsByClassName("display7")[0].innerText = display3;
+    // assign the innerText of display2 to the innerText of div with class 'display6'
+    displaySet.getElementsByClassName("display6")[0].innerText = display2;
+    // assign the innerText of display1 to the innerText of div with class 'display5'
+    displaySet.getElementsByClassName("display5")[0].innerText = display1;
+
+}
+
+
+function shiftDisplaysBy7(displaySet) {
+    // remap the innerText of each div with class 'display' to a corresponding div with class 'display' under the div with class 'displaySet'
+    // retrieve the innerText of div with class 'display1' under the div with class 'displaySet'
+    var display1 = displaySet.getElementsByClassName("display1")[0].innerText;
+    // retrieve the innerText of div with class 'display2' under the div with class 'displaySet'
+    var display2 = displaySet.getElementsByClassName("display2")[0].innerText;
+    // retrieve the innerText of div with class 'display3' under the div with class 'displaySet'
+    var display3 = displaySet.getElementsByClassName("display3")[0].innerText;
+    // retrieve the innerText of div with class 'display4' under the div with class 'displaySet'
+    var display4 = displaySet.getElementsByClassName("display4")[0].innerText;
+    // retrieve the innerText of div with class 'display5' under the div with class 'displaySet'
+    var display5 = displaySet.getElementsByClassName("display5")[0].innerText;
+    // retrieve the innerText of div with class 'display6' under the div with class 'displaySet'
+    var display6 = displaySet.getElementsByClassName("display6")[0].innerText;
+    // retrieve the innerText of div with class 'display7' under the div with class 'displaySet'
+    var display7 = displaySet.getElementsByClassName("display7")[0].innerText;
+    // retrieve the innerText of div with class 'display8' under the div with class 'displaySet'
+    var display8 = displaySet.getElementsByClassName("display8")[0].innerText;
+    // retrieve the innerText of div with class 'display9' under the div with class 'displaySet'
+    var display9 = displaySet.getElementsByClassName("display9")[0].innerText;
+
+    // clear the innerText values of each div with class 'display' under the div with class 'displaySet'
+    displaySet.getElementsByClassName("display1")[0].innerText = "";
+    displaySet.getElementsByClassName("display2")[0].innerText = "";
+    displaySet.getElementsByClassName("display3")[0].innerText = "";
+    displaySet.getElementsByClassName("display4")[0].innerText = "";
+    displaySet.getElementsByClassName("display5")[0].innerText = "";
+    displaySet.getElementsByClassName("display6")[0].innerText = "";
+    displaySet.getElementsByClassName("display7")[0].innerText = "";
+    displaySet.getElementsByClassName("display8")[0].innerText = "";
+    displaySet.getElementsByClassName("display9")[0].innerText = "";
+
+    // assign the innerText of display9 to the innerText of div with class 'display2'
+    displaySet.getElementsByClassName("display2")[0].innerText = display9;
+    // assign the innerText of display8 to the innerText of div with class 'display1'
+    displaySet.getElementsByClassName("display1")[0].innerText = display8;
+    // assign the innerText of display7 to the innerText of div with class 'display9'
+    displaySet.getElementsByClassName("display9")[0].innerText = display7;
+    // assign the innerText of display6 to the innerText of div with class 'display8'
+    displaySet.getElementsByClassName("display8")[0].innerText = display6;
+    // assign the innerText of display5 to the innerText of div with class 'display7'
+    displaySet.getElementsByClassName("display7")[0].innerText = display5;
+    // assign the innerText of display4 to the innerText of div with class 'display6'
+    displaySet.getElementsByClassName("display6")[0].innerText = display4;
+    // assign the innerText of display3 to the innerText of div with class 'display5'
+    displaySet.getElementsByClassName("display5")[0].innerText = display3;
+    // assign the innerText of display2 to the innerText of div with class 'display4'
+    displaySet.getElementsByClassName("display4")[0].innerText = display2;
+    // assign the innerText of display1 to the innerText of div with class 'display3'
+    displaySet.getElementsByClassName("display3")[0].innerText = display1;
+
+}
+
+
+
+// after a nudgeReel is called, trigger the appropriate shiftDisplaysBy function depending on which
+// nudgeReelSpeed is assigned to the parent div with class 'slot-machine-window'
+function shiftDisplays() {
+    var slotMachineWindows = document.getElementsByClassName("slot-machine-window");
+    for (var i = 0; i < slotMachineWindows.length; i++) {
+        if (slotMachineWindows[i].classList.contains("nudgeReelLow")) {
+            // retrieve the child div with class 'displaySet' and pass it to shiftDisplaysBy3
+            shiftDisplaysBy3(slotMachineWindows[i].getElementsByClassName("displaySet")[0]);
+            // retrieve the child div with class 'displaySetDuplicate' and pass it to shiftDisplaysBy3
+            shiftDisplaysBy3(slotMachineWindows[i].getElementsByClassName("displaySetDuplicate")[0]);}
+
+        else if (slotMachineWindows[i].classList.contains("nudgeReelMed")) {
+            // retrieve the child div with class 'displaySet' and pass it to shiftDisplaysBy5
+            shiftDisplaysBy5(slotMachineWindows[i].getElementsByClassName("displaySet")[0]);
+            // retrieve the child div with class 'displaySetDuplicate' and pass it to shiftDisplaysBy5
+            shiftDisplaysBy5(slotMachineWindows[i].getElementsByClassName("displaySetDuplicate")[0]);}
+
+        else if (slotMachineWindows[i].classList.contains("nudgeReelHigh")) {
+            // retrieve the child div with class 'displaySet' and pass it to shiftDisplaysBy6
+            shiftDisplaysBy7(slotMachineWindows[i].getElementsByClassName("displaySet")[0]);
+            // retrieve the child div with class 'displaySetDuplicate' and pass it to shiftDisplaysBy6
+            shiftDisplaysBy7(slotMachineWindows[i].getElementsByClassName("displaySetDuplicate")[0]);}
+
+    }
+
+
+// add class .resetPosition to each div with class 'slot-machine-window'
+//     resetPosition();
+    removeNudgeReelClasses()
+
+
+}
+// add class .resetPosition to each div with class 'slot-machine-window'
+function resetPosition() {
+    var slotMachineWindows = document.getElementsByClassName("slot-machine-window");
+    for (var i = 0; i < slotMachineWindows.length; i++) {
+        slotMachineWindows[i].classList.add("resetPosition");
+    }
+    // on transitionend, remove the class 'resetPosition' from each div with class 'slot-machine-window'
+    for (var i = 0; i < slotMachineWindows.length; i++) {
+        slotMachineWindows[i].addEventListener("transitionend", function() {
+            this.classList.remove("resetPosition");
+        })
+    }
+// remove the class 'nudgeReelLow', 'nudgeReelMed', and 'nudgeReelHigh' from each div with class 'slot-machine-window'
+
+}
+function removeNudgeReelClasses() {
+    var slotMachineWindows = document.getElementsByClassName("slot-machine-window");
+    for (var i = 0; i < slotMachineWindows.length; i++) {
+        slotMachineWindows[i].classList.remove("nudgeReelLow");
+        slotMachineWindows[i].classList.remove("nudgeReelMed");
+        slotMachineWindows[i].classList.remove("nudgeReelHigh");
+        slotMachineWindows[i].classList.remove("resetPosition");
+    }
+}
+
+
+// add function nudgeReel to the 'spin' button on click
+document.getElementById("spin").addEventListener("click", nudgeReel);
+
+
+// when the button with id 'spinX' is clicked, the class 'spinner' is added to each div with class 'displaySet' and
+function spinnerX() {
+    var displaySets = document.getElementsByClassName("displaySet");
+    var displaySetsDuplicate = document.getElementsByClassName("displaySetDuplicate");
+    // add the class 'spinner' to each div with class 'displaySet'
+    for (var i = 0; i < displaySets.length; i++) {
+        displaySets[i].classList.add("spinner");
+    }
+
+    // add the class 'spinner' to each div with class 'displaySetDuplicate'
+    for (var i = 0; i < displaySetsDuplicate.length; i++) {
+        displaySetsDuplicate[i].classList.add("spinner");
+
+    }
+
+    // on animationend, remove the class 'spinner' from each div with class 'displaySet'
+    for (var i = 0; i < displaySets.length; i++) {
+        displaySets[i].addEventListener("animationend", function() {
+                this.classList.remove("spinner");
+            }
+        );
+    }
+    // on animationend, remove the class 'spinner' from each div with class 'displaySetDuplicate'
+    for (var i = 0; i < displaySetsDuplicate.length; i++) {
+        displaySetsDuplicate[i].addEventListener("animationend", function() {
+                this.classList.remove("spinner");
+            }
+        );
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+

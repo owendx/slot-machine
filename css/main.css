@@ -1,262 +1,174 @@
-* {
-    box-sizing: border-box;
-}
 
 
-body {
-    background-color: rgba(43, 93, 95);
-    display: grid;
-    height: 100vh;
-    justify-items: center;
+
+#container {
+    display: flex;
     align-items: center;
-    margin: 0;
-    font-family: Helvetica, sans-serif;
+    justify-content: center;
+    flex-direction: column;
+
 }
+
 
 #slot-machine {
-    display: grid;
-    grid-template-rows: 1fr 3fr 1fr 1fr;
+    display: flex;
+    align-items: center;
     justify-items: center;
-    align-items: center;
-    background-color: grey;
+    width: 1000px;
+    height: 700px;
 }
 
-#reels{
+.slot-machine-reel {
+    width: 300px;
+    height: 585px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     display: flex;
-    grid-gap: 1px;
-    border: 3px solid red;
-
-
-
-
-}
-
-.display {
-    display: flex;
-    justify-content: center;
     align-items: center;
-
-    -webkit-transition: 0.5s ease-in-out;
-    -moz-transition: 0.5s ease-in-out;
-    -o-transition: 0.5s ease-in-out;
-    transition: 0.5s ease-in-out;
-
-    padding: 8px 0;
-
-    width: 100%;
-
-
-
-}
-
-
-
-
-
-
-.reelWindow {
-    background-color: white;
-    height: 450px;
-    width: 100px;
-    /*padding: 2px;*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    -webkit-transition: 1s ease-in-out;
-    -moz-transition: 1s ease-in-out;
-    -o-transition: 1s ease-in-out;
-    transition: 1s ease-in-out;
-
+    justify-items: center;
     overflow: hidden;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-orientation: upright;
+    flex-shrink: 0;
+
+}
+
+.slot-machine-window {
+    width: 100%;
+    height: 1750px;
+    background-color: #ddd;
+    border:solid 1px black;
+    margin: 0 auto;
+    overflow: hidden;
+    /*white-space: nowrap;*/
+    position: relative;
+    display:flex;
+    justify-content: flex-start;
     flex-direction: column;
 
-}
-
-#scores {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    margin-right: 10px;
-
 
 }
-
-#scoresAndButtons {
+.displaySet, .displaySetDuplicate {
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 20px;
+    position: absolute;
+    width:100%;
+    height: 100%;
+}
+
+.displaySet > div , .displaySetDuplicate > div {
+    height: 300px;
+    width:100%;
+    border:solid 1px red;
+    display:flex;
     justify-content: center;
     align-items: center;
-    margin: 20px;
-}
-
-.counter {
-    background-color: white;
-    height: 30px;
-    width: 120px;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
-}
-
-.windowTable {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.windowTitle {
-    display: flex;
-    background-color: white;
     text-align: center;
-    justify-content: center;
-    align-items: center;
-    height: 30px;
-    border: 1px solid black;
+    font-size: 75px;
+
 }
 
-.myButton {
+
+/*.displaySet {*/
+/*  animation:slider2 9s linear infinite;*/
+/*}*/
+
+/*.displaySetDuplicate{*/
+/*  animation: slider 9s linear infinite;*/
+/*}*/
+
+.displaySetSpin {
+    animation: slider2 2s ease-in-out forwards;
+}
+
+.displaySetDuplicateSpin {
+    animation: slider 2s ease-in-out forwards;
+}
+
+.displaySetSpinAutoPlay {
+    animation: slider2 1s ease-in-out infinite;
+}
+
+.displaySetDuplicateSpinAutoPlay {
+    animation: slider 1s ease-in-out infinite;
+}
+
+
+
+@keyframes slider {
+    0%   { top:0px; }
+    100%   { top:100% }
+}
+
+@keyframes slider2 {
+    0%   { top:-100%; }
+    100%   { top:0px }
+}
+
+.spinner {
+    transform: translateY(50%);
+    transition: transform 2s ease-in-out;
+
+}
+
+.nudgeReelLow {
+    transform: translateY(-583.22px);
+    transition: transform 2s ease-in-out;
+    /*animation-fill-mode: forwards;*/
+
+}
+
+.nudgeReelMed {
+    transform: translateY(-972.2px);
+    transition: transform 2s ease-in-out;
+    /*animation-fill-mode: forwards;*/
+
+}
+
+.nudgeReelHigh {
+    transform: translateY(-1361.08px);
+    transition: transform 2s ease-in-out;
+    /*animation-fill-mode: forwards;*/
+
+}
+
+.resetPosition {
+    transform: translateY(0px);
+
+}
+
+.buttonClass {
+    font-size:15px;
+    font-family:Arial;
+    width:140px;
+    height:50px;
+    border-width:1px;
+    color:#fff;
+    border-color:#d02718;
+    font-weight:bold;
+    border-top-left-radius:18px;
+    border-top-right-radius:18px;
+    border-bottom-left-radius:18px;
+    border-bottom-right-radius:18px;
     box-shadow: 3px 4px 0px 0px #8a2a21;
-    background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
-    background-color:#c62d1f;
-    border-radius:33px;
-    border:2px solid #d02718;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:21px;
-    padding:16px 23px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #810e05;
-    margin: 5px;
-}
-.myButton:hover {
-    background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
-    background-color:#f24437;
-}
-.myButton:active {
-    position:relative;
-    top:1px;
+    text-shadow: 0px 1px 0px #810e05;
+    background:linear-gradient(#c62d1f, #f24437);
 }
 
-#buttons {
-    margin-left: 20px;
-}
-
-#liveConsole, #textInput {
-    background-color: white;
-}
-
-#liveConsole {
-    height: 75px;
-    width: 750px;
-}
-
-#textInput {
-    height: 25px;
-    width: 750px;
-}
-
-#liveConsoleRow, #userInputRow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 15px;
-}
-
-.consoleButton {
-    box-shadow:inset 0px 1px 0px 0px #cf866c;
-    background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
-    background-color:#d0451b;
-    border-radius:3px;
-    border:1px solid #942911;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-
-    padding:6px 24px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #854629;
-    margin: 4px;
-}
-.consoleButton:hover {
-    background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
-    background-color:#bc3315;
-}
-.consoleButton:active {
-    position:relative;
-    top:1px;
-}
-
-#reset {
-    font-size: 30px;
-    height: 75px;
-}
-
-#lowerConsole {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-
-}
-
-.consoleBox {
-    margin: 10px 0 10px 10px;
-}
-
-div#liveConsoleButtons {
-    display: flex;
-    justify-content: center;
-    /*align-items: center;*/
-    flex-direction: column;
-}
-
-@-webkit-keyframes image_blur {
-    0% { -webkit-filter: blur(0px);}
-    50% { -webkit-filter: blur(5px);}
-    100% { -webkit-filter: blur(0px);}
-}
-
-@-webkit-keyframes transform {
-    0% { -webkit-transform: translate(0px, 0px);}
-    /*20% { -webkit-transform: translate(0px, 400px);}*/
-    100% { -webkit-transform: translate(0px, 1210px);}
+.buttonClass:hover {
+    background: linear-gradient(#f24437, #c62d1f);
 }
 
 
-/*.display:hover {*/
-/*    -webkit-animation: image_blur 2s ease-in-out;*/
-/*    -moz-animation: image_blur 2s ease-in-out;*/
-/*    -o-animation: image_blur 2s ease-in-out;*/
-/*    animation: image_blur 2s ease-in-out;*/
-/*}*/
 
 
-.blur {
-    -webkit-animation: image_blur 2s ease-in-out;
-    -moz-animation: image_blur 2s ease-in-out;
-    -o-animation: image_blur 2s ease-in-out;
-    animation: image_blur 2s ease-in-out;
-}
 
 
-.translate {
-    -webkit-animation: transform 2.5s ease-in-out;
-    -moz-animation: transform 2.5s ease-in-out;
-    -o-animation: transform 2.5s ease-in-out;
-    animation: transform 2.5s ease-in-out;
-    animation-fill-mode: forwards;
-}
 
 
-/*.translate {*/
-/*    transform: translate(0, -1200px);*/
-/*    animation-timing-function: ease-in;*/
-/*}*/
 
-.match {
-    background-color: #ff0000;
-}
+
