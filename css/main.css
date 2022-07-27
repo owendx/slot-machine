@@ -1,14 +1,9 @@
-
-
-
 #container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
 }
-
 
 #slot-machine {
     display: flex;
@@ -32,7 +27,6 @@
     flex-wrap: wrap;
     text-orientation: upright;
     flex-shrink: 0;
-
 }
 
 .slot-machine-window {
@@ -42,7 +36,6 @@
     border:solid 1px black;
     margin: 0 auto;
     overflow: hidden;
-    /*white-space: nowrap;*/
     position: relative;
     display:flex;
     justify-content: flex-start;
@@ -69,91 +62,43 @@
     align-items: center;
     text-align: center;
     font-size: 75px;
-
 }
 
-
-/*.displaySet {*/
-/*  animation:slider2 9s linear infinite;*/
-/*}*/
-
-/*.displaySetDuplicate{*/
-/*  animation: slider 9s linear infinite;*/
-/*}*/
-
-.displaySetSpin {
-    animation: slider2 2s ease-in-out forwards;
-}
-
-.displaySetDuplicateSpin {
-    animation: slider 2s ease-in-out forwards;
-}
-
-.displaySetSpinAutoPlay {
-    animation: slider2 1s ease-in-out infinite;
-}
-
-.displaySetDuplicateSpinAutoPlay {
-    animation: slider 1s ease-in-out infinite;
-}
-
-
-
-@keyframes slider {
-    0%   { top:0px; }
-    100%   { top:100% }
-}
-
-@keyframes slider2 {
-    0%   { top:-100%; }
-    100%   { top:0px }
-}
 
 .spinner {
     transform: translateY(50%);
     transition: transform 2s ease-in-out;
-
 }
 
 .nudgeReelLow {
     transform: translateY(-583.22px);
     transition: transform 2s ease-in-out;
-    /*animation-fill-mode: forwards;*/
-
 }
 
 .nudgeReelMed {
     transform: translateY(-972.2px);
     transition: transform 2s ease-in-out;
-    /*animation-fill-mode: forwards;*/
-
 }
 
 .nudgeReelHigh {
     transform: translateY(-1361.08px);
     transition: transform 2s ease-in-out;
-    /*animation-fill-mode: forwards;*/
-
 }
 
 .resetPosition {
     transform: translateY(0px);
-
 }
 
 .buttonClass {
     font-size:15px;
-    font-family:Arial;
+    font-family: Arial, serif;
     width:140px;
     height:50px;
     border-width:1px;
     color:#fff;
     border-color:#d02718;
     font-weight:bold;
-    border-top-left-radius:18px;
-    border-top-right-radius:18px;
-    border-bottom-left-radius:18px;
-    border-bottom-right-radius:18px;
+    border-radius: 18px;
     box-shadow: 3px 4px 0px 0px #8a2a21;
     text-shadow: 0px 1px 0px #810e05;
     background:linear-gradient(#c62d1f, #f24437);
