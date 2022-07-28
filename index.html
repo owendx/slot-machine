@@ -9,8 +9,42 @@
 <body>
 <div id="container">
     <div id="slot-machine"></div>
-    <button class="buttonClass" id="spin">SPIN</button>
-</div>
+    <div id="buttonRow">
+        <button class="buttonClass" id="autoplay">AUTOPLAY</button>
+        <button class="buttonClass" id="spin">SPIN</button>
+        <button class="buttonClass" id="cashout">CASHOUT</button>
+    </div>
+    <div id="infoConsole">
+        <div class="infoCell">
+            <div class="header">BALANCE</div>
+            <div class="infoText" id="balance">BALANCE</div>
+        </div>
+        <div class="infoCell">
+            <div class="header">WINNINGS</div>
+            <div class="infoText" id="winnings">WINNINGS</div>
+        </div>
+        <div class="infoCell">
+            <div class="header">BET</div>
+            <div id="betBox">
+                <div class="infoText" id="bet">BET</div>
+                <div id="betButtons"><button id="increaseBet">INCREASE</button><button id="decreaseBet">DECREASE</button></div>
+            </div>
 
+        </div>
+        <div class="infoCell">
+            <div class="header">INFO</div>
+            <div class="infoText" id="info">INFO</div>
+        </div>
+        <div class="infoCell">
+            <div class="header">CASHOUT</div>
+            <div class="infoText" id="cashoutWindow"></div>
+        </div>
+        <div class="infoCell">
+            <div class="header">DESIGN</div>
+            <div class="infoText" id="design">Olu T</div>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

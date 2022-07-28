@@ -5,10 +5,23 @@ A slot machine powered by HTML, CSS and Javascript.
 
 ### Contents
 
+- Roadmap and Planned Features
 - Wireframe
 - Game Flow
 - Slot Machine Description
 - Pseudocode
+
+### Roadmap and Planned Features
+As of July 28, 2022, the project is at MVP stage. The slot machine is fully functional and can be played by the user.
+There are several features planned to be implemented in the future:
+
+* Complete redesign of the slot machine to a pirate theme with appropriate music and sound effects.
+* Replacement of numbers on the reel with images.
+* Implementation of a 'cheat code' feature that enables several hidden functions on the slot machine, including:
+    1. Free play by not requiring a bet or not decreasing the user balance on each spin.
+    2. Force the reels to match, resulting in jackpot
+    3. Freezing one or multiple reels to prevent them from spinning
+* Implementation of a cash voucher function which allows users to cash out their winnings in the form of code voucher, which can be entered back into the slot machine as a credit balance for continued play.
 
 ### Wireframe
 <img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-wireframe.png" />
@@ -20,7 +33,7 @@ A slot machine powered by HTML, CSS and Javascript.
 
 ### Symbol List
 There are **9 symbols** that may appear in the reels when the slot machine is played:
-<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-symbols-3.png" />
+<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-symbols-4.png" />
 
 ### Slot Machine Description
 
