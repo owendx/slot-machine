@@ -68,11 +68,6 @@ function createDisplaySets() {
 // attach the display sets to the windows
 createDisplaySets();
 
-
-
-// attach the display set duplicates to the windows
-// createDisplaySetsDuplicates();
-
 // create 9 divs with class 'display' and append them to each div with class 'displaySet'
 function createDisplays() {
     const displaySets = document.getElementsByClassName("displaySet");
