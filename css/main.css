@@ -127,6 +127,7 @@ body {
 #increaseBet:active, #decreaseBet:active, #maxbet:active {
     position:relative;
     top:1px;
+    cursor: pointer;
 }
 
 .display > img {
@@ -168,6 +169,7 @@ body {
 
 #decreaseBet, #increaseBet, #maxbet, #autoplay, #cashout, #spinWheel, #music, #sound {
     filter: drop-shadow(5px 7px 3px rgb(0 0 0 / 0.8));
+    cursor: pointer;
 }
 
 #right {
@@ -253,11 +255,13 @@ img#spinWheel {
 #autoplay:active, #cashout:active, #music:active, #sound:active {
     position:relative;
     top:1px;
+    cursor: pointer;
 }
 
 #spinWheel:active {
     position:relative;
     top:4px;
+    cursor: pointer;
 }
 
 #spinWheel {;
