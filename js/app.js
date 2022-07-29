@@ -47,8 +47,8 @@ document.getElementById("autoplay").addEventListener("click", playClickSFX);
 document.getElementById("increaseBet").addEventListener("click", playClickSFX);
 document.getElementById("decreaseBet").addEventListener("click", playClickSFX);
 document.getElementById("cashout").addEventListener("click", playClickSFX);
-// document.getElementById("music").addEventListener("click", playClickSFX);
-// document.getElementById("sound").addEventListener("click", playClickSFX);
+document.getElementById("music").addEventListener("click", playClickSFX);
+document.getElementById("sound").addEventListener("click", playClickSFX);
 
 
 
