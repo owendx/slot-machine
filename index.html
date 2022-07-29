@@ -3,48 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>SLOT MACHINE</title>
+
     <link rel="stylesheet" href="css/main.css">
     <script defer src="js/app.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Julee&family=Londrina+Shadow&family=Merienda+One&family=Mochiy+Pop+One&family=Patrick+Hand&family=Poiret+One&family=Press+Start+2P&family=Teko&display=swap" rel="stylesheet">
+
 </head>
 <body>
 <div id="container">
-    <div id="slot-machine"></div>
-    <div id="buttonRow">
-        <button class="buttonClass" id="autoplay">AUTOPLAY</button>
-        <button class="buttonClass" id="spin">SPIN</button>
-        <button class="buttonClass" id="cashout">CASHOUT</button>
-    </div>
-    <div id="infoConsole">
-        <div class="infoCell">
-            <div class="header">BALANCE</div>
-            <div class="infoText" id="balance">BALANCE</div>
-        </div>
-        <div class="infoCell">
-            <div class="header">WINNINGS</div>
-            <div class="infoText" id="winnings">WINNINGS</div>
-        </div>
-        <div class="infoCell">
-            <div class="header">BET</div>
-            <div id="betBox">
-                <div class="infoText" id="bet">BET</div>
-                <div id="betButtons"><button id="increaseBet">INCREASE</button><button id="decreaseBet">DECREASE</button><button id="maxbet">MAX BET</button></div>
-            </div>
-
-        </div>
-        <div class="infoCell">
-            <div class="header">INFO</div>
-            <div class="infoText" id="info">INFO</div>
-        </div>
-        <div class="infoCell">
-            <div class="header">CASHOUT</div>
-            <div class="infoText" id="cashoutWindow"></div>
-        </div>
-        <div class="infoCell">
-            <div class="header">DESIGN</div>
-            <div class="infoText" id="design">Olu T</div>
-        </div>
+    <div id="left">
+        <img id="pirateframe" src="assets/slotmachineframe/frame.svg" width="1100px" style="position: absolute; z-index: 250">
+        <div id="slot-machine" style="z-index: 1"></div>
+        <div id="info"></div>
 
     </div>
+    <div id="right">
+        <div class="spinBox">
+            <img id="spinWheel" src="assets/slotmachineframe/spin.svg" width="325px" style="z-index: 3">
+            <img id="autoplay" src="assets/slotmachineframe/autoplay.svg" width="200px" style="z-index: 3">
+
+        </div>
+        <div class="betBox">
+            <img id="totalBet" src="assets/slotmachineframe/totalbet.svg" width="300px" style="z-index: 3">
+            <div id="bet" style="z-index: 3;">BET</div>
+        </div>
+        <div class="betButtonsBox">
+            <img id="increaseBet" src="assets/slotmachineframe/increasebet.svg" width="85px" style="z-index: 3">
+            <img id="decreaseBet" src="assets/slotmachineframe/decreasebet.svg" width="85px" style="z-index: 3">
+            <img id="maxbet" src="assets/slotmachineframe/maxbet.svg" width="85px" style="z-index: 3">
+        </div>
+        <div class="winBox">
+            <img id="win" src="assets/slotmachineframe/win.svg" width="300px" style="z-index: 3">
+            <div id="winnings" style="z-index: 3">WINNINGS</div>
+        </div>
+        <div class="balanceBox">
+            <img id="balanceWindow" src="assets/slotmachineframe/balance.svg" width="450px" style="z-index: 3">
+            <div id="balance" style="z-index: 3">BALANCE</div>
+        </div>
+        <div id="cashoutBox">
+            <img id="cashout" src="assets/slotmachineframe/cashout.svg" width="300px" style="z-index: 3">
+        </div>
+        <div id="musicBox">
+            <img id="music" src="assets/slotmachineframe/musicon.svg" width="200px" style="z-index: 5">
+            <img id="sound" src="assets/slotmachineframe/soundon.svg" width="200px" style="z-index: 5">
+        </div>
+    </div>
+
 </div>
+
 </body>
+<div id="fullscreenFlexContainer">
+    <img id="jackpotHidden" src="assets/imgs/jackpotalert.svg" style="z-index: 5">
+    <div id="infoOverlayHidden"></div>
+</div>
 </html>

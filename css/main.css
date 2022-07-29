@@ -2,22 +2,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    margin: 40px 40px 15px 40px;
+}
+
+body {
+    background-image: url(/assets/slotmachineframe/reel3.svg);
 }
 
 #slot-machine {
     display: flex;
-    align-items: center;
-    justify-items: center;
     width: 1000px;
     height: 700px;
-    justify-content: space-evenly;
+    position: relative;
+    top: 215px;
+    right: 48px;
 }
 
 .slot-machine-reel {
     width: 300px;
     height: 585px;
-    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     display: flex;
@@ -33,7 +36,6 @@
 .slot-machine-window {
     width: 100%;
     height: 1750px;
-    background-color: #ddd;
     border:solid 1px black;
     margin: 0 auto;
     overflow: hidden;
@@ -41,26 +43,30 @@
     display:flex;
     justify-content: flex-start;
     flex-direction: column;
+
 }
 
-.displaySet, .displaySetDuplicate {
+.displaySet {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     font-size: 20px;
     width:100%;
     height: 100%;
+
+
 }
 
-.displaySet > div , .displaySetDuplicate > div {
-    height: 300px;
+.displaySet > div {
+    height: 200px;
     width:100%;
-    border:solid 1px red;
     display:flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-size: 75px;
+    background-image: url(/assets/slotmachineframe/reel1.svg);
+    padding: 1px 0;
 }
 
 
@@ -83,55 +89,6 @@
     transform: translateY(0px);
 }
 
-.buttonClass {
-    font-size:65px;
-    font-family: Arial, serif;
-    width:170px;
-    height:85px;
-    border-width:1px;
-    color:#fff;
-    border-color:#d02718;
-    font-weight:bold;
-    border-radius: 18px;
-    box-shadow: 3px 4px 0px 0px #8a2a21;
-    text-shadow: 0px 1px 0px #810e05;
-    background:linear-gradient(#c62d1f, #f24437);
-}
-
-.buttonClass:hover {
-    background: linear-gradient(#f24437, #c62d1f);
-}
-
-.buttonClass:active {
-    position:relative;
-    top:1px;
-}
-
-#infoConsole {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    width: 1000px;
-    height: 200px;
-    background-color: red;
-    border-radius: 10px;
-    place-items: center;
-    grid-gap: 2px;
-    margin: 50px;
-}
-
-.infoCell {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: #fff;
-    border: 1px solid black;
-    width: 100%;
-    height: 100%;
-    font-size: 25px;
-}
-
 #balance, #winnings, #cashoutWindow {
     font-size: 75px;
 }
@@ -140,21 +97,12 @@
     font-size: 50px;
 }
 
-.header {
-    background-color: black;
-    color: white;
-    width: 100%;
-}
-
-.infoText{
-    margin-top: 15px;
-}
-
 #betBox {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 #autoplay {
@@ -171,24 +119,9 @@
     justify-content: space-around;
 }
 
-#increaseBet, #decreaseBet, #maxbet {
-    box-shadow:inset 0px 1px 0px 0px #54a3f7;
-    background: #007dc1 linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
-    border-radius:3px;
-    border:1px solid #124d77;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family: Arial, serif;
-    font-size:13px;
-    padding:6px 24px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #154682;
-    margin: 4px;
-}
 
 #increaseBet:hover, #decreaseBet:hover, #maxbet:hover {
-    background: #0061a7 linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+    /*background: #0061a7 linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);*/
 }
 
 #increaseBet:active, #decreaseBet:active, #maxbet:active {
@@ -196,10 +129,211 @@
     top:1px;
 }
 
-img {
-    width: 125px;
-    height: 125px;
+.display > img {
+    width: 175px;
+    height: 175px;
 }
+
+#slot-machine {
+    width: 800px;
+    height: 800px;
+}
+
+#pirateframe {
+    transform: scale(1, 1.30);
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.5));
+}
+
+.spinning {
+    animation: spin 2s ease-in-out forwards;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+#bet, #winnings, #balance {
+    color: white;
+    font-family: 'Julee', cursive;
+}
+
+#winnings, #balance {
+    font-size: 55px;
+}
+
+#decreaseBet, #increaseBet, #maxbet, #autoplay, #cashout, #spinWheel, #music, #sound {
+    filter: drop-shadow(5px 7px 3px rgb(0 0 0 / 0.8));
+}
+
+#right {
+    display: grid;
+    grid-template-rows: 325px 95px 95px 95px 95px;
+    justify-items: center;
+    position: relative;
+    right: -5px;
+}
+
+#left {
+    flex-grow: 0.75;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.betBox, .betButtonsBox, .winBox, .balanceBox {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+
+}
+
+#bet {
+    position: relative;
+    right: 120px;
+    width: 75px;
+}
+
+.betBox {
+    height: 100px;
+}
+
+.betButtonsBox {
+    position: relative;
+    left: -40px;
+    top: -10px;
+}
+
+img#spinWheel {
+    align-self: center;
+}
+
+#decreaseBet {
+    position: relative;
+    left: -20px;
+}
+
+#winnings {
+    width: 75px;
+    position: relative;
+    right: 125px;
+}
+
+#balance  {
+    width: 75px;
+    position: relative;
+    right: 150px;
+}
+
+#left {
+    display: flex;
+    align-items: center;
+}
+#right {
+    right: -30px;
+}
+
+.spinBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+#autoplay {
+    cursor: pointer;
+}
+
+#autoplay:active, #cashout:active, #music:active, #sound:active {
+    position:relative;
+    top:1px;
+}
+
+#spinWheel:active {
+    position:relative;
+    top:4px;
+}
+
+#spinWheel {;
+    position: relative;
+    top: -7px;
+
+}
+
+#cashout {
+    padding-top: 15px;
+    position: relative;
+    left: -20px;
+}
+
+#music {
+    padding-top: 15px;
+}
+
+#info {
+    width: 100%;
+    height: 155px;
+    background-image: url(/assets/slotmachineframe/woodtexture.svg);
+    background-size: cover;
+    background-repeat: round;
+    position: relative;
+    top: 15px;
+}
+
+#jackpotDisplayed, #infoOverlayDisplayed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    display: block;
+    font-size: 50px;
+    color: white;
+    font-family: 'Julee', cursive;
+    text-align: center;
+    align-content: center;
+    align-self: center;
+}
+
+#infoOverlayDisplayed {
+    padding-top: 75px;
+}
+
+#jackpotHidden {
+    display: none;
+}
+
+#containerDark {
+    opacity: 0.1;
+}
+
+#infoOverlay {
+    display: none;
+}
+
+#fullscreenFlexContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+
+
 
 
 

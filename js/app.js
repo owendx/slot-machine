@@ -1,17 +1,22 @@
 /*----- constants -----*/
 
 // reference of images to be used as symbols in the slot machine
-const symbols = ["imgs/7.png", "imgs/bar.png", "imgs/bell.png", "imgs/cherry.png", "imgs/clover.png", "imgs/club.png", "imgs/diamond.png", "imgs/heart.png", "imgs/spade.png"];
+const symbols = ["assets/symbols/anchor.svg", "assets/symbols/bomb.svg", "assets/symbols/coin.svg", "assets/symbols/flag.svg", "assets/symbols/hat.svg", "assets/symbols/skull.svg", "assets/symbols/treasure.svg", "assets/symbols/a.svg", "assets/symbols/10.svg"];
 const numberOfReels = 3;
+const music = new Audio("assets/sound/music.mp3");
+const cashoutSFX = new Audio("assets/sound/cashout.wav");
+const jackpotSFX = new Audio("assets/sound/jackpot.wav");
+const wheelSFX = new Audio("assets/sound/wheel.mp3");
+const clickSFX = new Audio("assets/sound/click.wav");
 
 
 /*----- app's state (variables) -----*/
-let balance;
+let balance = 100;
 let bet = 5;
 let winnings = 0;
 let cashout = 0;
 let autoPlayIsEnabled = false;
-let welcomeMessage = "Welcome to the slot machine!";
+
 
 
 /*----- cached element references -----*/
@@ -19,8 +24,7 @@ let welcomeMessage = "Welcome to the slot machine!";
 
 
 /*----- event listeners -----*/
-// add an event listener to the 'spin' button that calls play when clicked
-document.getElementById("spin").addEventListener("click", play);
+
 
 //add an event listener to the 'autoPlay' button that calls toggleAutoPlay when clicked
 document.getElementById("autoplay").addEventListener("click", toggleAutoPlay);
@@ -36,6 +40,15 @@ document.getElementById("decreaseBet").addEventListener("click", decreaseBet);
 
 // add an event listener to the 'cashout' button that calls cashOut when clicked
 document.getElementById("cashout").addEventListener("click", cashOut);
+
+// attach click event listeners to autoplay, increasebet, decreasebet, cashout, musicon, musicoff, soundon, soundoff buttons
+// to play sound when clicked
+document.getElementById("autoplay").addEventListener("click", playClickSFX);
+document.getElementById("increaseBet").addEventListener("click", playClickSFX);
+document.getElementById("decreaseBet").addEventListener("click", playClickSFX);
+document.getElementById("cashout").addEventListener("click", playClickSFX);
+document.getElementById("music").addEventListener("click", playClickSFX);
+document.getElementById("sound").addEventListener("click", playClickSFX);
 
 
 
@@ -70,20 +83,7 @@ function setStartingScores() {
 }
 setStartingScores()
 
-// set the innerText of div with id info with welcomeMessage
-function setWelcomeMessage() {
-    document.getElementById("info").innerText = welcomeMessage;
-}
-setWelcomeMessage()
 
-// clear the innerText of the div with id 'info'
-function clearInfo() {
-    setTimeout(function() {
-        if (document.getElementById("info").innerText === "Now spinning...") {
-            document.getElementById("info").innerText = "";
-        }
-    }, 2100);
-}
 
 //create 3 divs with class slot-machine-window and append them to the div with class slot-machine
 function createSlotMachineReels() {
@@ -475,26 +475,69 @@ function checkMatch(){
     // now run checkSame on each array in rows
     for (i = 0; i < rows.length; i++) {
         if (checkSame(rows[i])) {
+            playJackpotSFX();
             console.log('JACKPOT!')
 
-            // alert message to screen informing user of a win and how much they won
-            alert(`JACKPOT!!! You just won $${bet * 10}!`);
-            creditWinnings()
 
-            // update the info box with the winningMessage
-            document.getElementById("info").innerText = `JACKPOT! You have won $${bet * 10}!`;
+            // change the opacity of the div with id 'container' to 0.1
+            document.getElementById("container").style.opacity = 0.1;
+            // retrieve the img with id 'jackpotHidden', and change its id to 'jackpotDisplayed'
+            const jackpotHidden = document.getElementById("jackpotHidden");
+            jackpotHidden.id = "jackpotDisplayed";
+
+
+            // after 2 seconds, change the id of the img with id 'jackpotDisplayed' to 'jackpotHidden'
+            setTimeout(function() {
+                jackpotHidden.id = "jackpotHidden";
+            }, 2000);
+            // change the opacity of the div with id 'container' back to 1
+            setTimeout(function() {
+                document.getElementById("container").style.opacity = 1;
+            }, 2000);
+
+
+
+
+
+
+
+            creditWinnings()
         }
     }
     checkBalanceUnder5()
 }
 
+function displayInfo() {
+    // change the opacity of the div with id 'container' to 0.1
+    document.getElementById("container").style.opacity = 0.1;
+    // retrieve the div with id 'infoOverlay', and change its id to 'infoOverlayDisplayed'
+    let infoOverlayHidden = document.getElementById("infoOverlayHidden");
+    infoOverlayHidden.id = "infoOverlayDisplayed";
+
+
+    // after 2 seconds, change the id of the img with id 'infoOverlayDisplayed' back to 'infoOverlayHidden'
+    setTimeout(function() {
+        infoOverlayHidden.id = "infoOverlayHidden";
+    }, 7000);
+    // change the opacity of the div with id 'container' back to 1
+    setTimeout(function() {
+        document.getElementById("container").style.opacity = 1;
+    }, 7000);
+    // after 7 seconds, change the innerText value of the div with id 'infoOverlayDisplayed' to ' '
+    setTimeout(function() {
+        document.getElementById("infoOverlayHidden").innerText = " ";
+    }, 7000);
+
+}
 // increase bet by 5
 function increaseBet(){
     // if user tries to increase bet to more than their current balance, alert them
     if (bet + 5 > balance) {
-        alert(`You don't have enough money to increase your bet by 5!  \n Your balance is currently $${balance}! \n Your bet can't be higher than your balance! \n Decrease your bet to $${balance} or below to continue playing!`);
+        // update the innerText of the div with id 'infoOverlayHidden'
+        document.getElementById("infoOverlayHidden").innerText = `You don't have enough money to increase your bet by 5!  \n Your balance is currently $${balance}! \n Your bet can't be higher than your balance! \n Decrease your bet to $${balance} or below to continue playing!`;
         autoPlayIsEnabled = false;
-    }
+        displayInfo();}
+
     else {
         // increases the value of bet by increments of 5
         bet = bet + 5;
@@ -512,24 +555,35 @@ function decreaseBet(){
         document.getElementById("bet").innerText = bet;
     }
     else {
-        alert("You can't bet less than $5!");
+
+        // update the innerText of the div with id 'infoOverlayHidden'
+        document.getElementById("infoOverlayHidden").innerText = `You can't bet less than $5!`;
+        displayInfo();
     }
 }
 
 // function that informs user their bet is too high if they try to play with a bet higher than their balance
 function betTooHigh() {
     // if true, alert the user that their bet is too high
-    alert(`Your bet is too high! \n Your bet is currently $${bet} \n You only have $${balance} in your balance \n Please lower your bet to $${balance} or below to play`);
+
+    // update the innerText of the div with id 'infoOverlayHidden'
+    document.getElementById("infoOverlayHidden").innerText = `Your bet is too high! \n Your bet is currently $${bet} \n You only have $${balance} in your balance \n Please lower your bet to $${balance} or below to play`;
+    displayInfo();
     // set autoPlayIsEnabled to false
     autoPlayIsEnabled = false;
+
 }
 
 // function contains all the code that runs when the slot machine is played
 function play() {
+
     // check if balance is less than or equal to 0
     if (balance <= 0) {
         // if true, alert the user that they have no more credits
-        alert("You have no more credits to play!");
+
+        // update the innerText of the div with id 'infoOverlayHidden'
+        document.getElementById("infoOverlayHidden").innerText = `You have no more credits to play!`;
+        displayInfo();
         // set autoPlayIsEnabled to false
         autoPlayIsEnabled = false;
     }
@@ -539,6 +593,8 @@ function play() {
     }
 
     else {
+        // play wheel sound
+        playWheelSFX();
         // decrease balance by the current value of bet
         balance = balance - bet;
         // update the innerText value of the div with id 'balance'
@@ -547,14 +603,13 @@ function play() {
         // call the function that spins the reels of the slot machine!
         nudgeReel()
 
-        // update the info div to say 'now spinning....'
-        document.getElementById("info").innerText = "Now spinning...";
+        // call the function that spins the wheel!
+        startSpinWheelAnimation()
+
 
         // run checkMatch function 2.1 seconds after nudgeReel function is finished
         setTimeout(checkMatch, 2050);
 
-        // clear the info div 2.1 seconds after nudgeReel function is finished only if the innerText of the info div is 'now spinning...'
-        clearInfo();
     }
 }
 
@@ -574,13 +629,15 @@ function autoPlay() {
 
 // cashout function to add the current value of winnings to the balance
 function cashOut() {
+    playCashoutSFX();
     cashout = balance;
-    document.getElementById("cashoutWindow").innerText = cashout;
-    //alert the user the amount of money they have won
-    alert(`You have won $${winnings} \n You have cashed out a total of $${cashout}`);
 
-    // update the innerText of info div to say 'You have cashed out a total of $${cashout}. Thank you for playing!'
-    document.getElementById("info").innerText = `You have cashed out a total of $${cashout}. Thank you for playing!`;
+    //alert the user the amount of money they have won
+
+    // update the innerText value of infoOverlayHidden
+    document.getElementById("infoOverlayHidden").innerText = `You have won $${winnings} \n You have cashed out a total of $${cashout}`;
+    displayInfo();
+
 
     // reset winnings to 0 and balance to 0
     winnings = 0;
@@ -593,8 +650,9 @@ function cashOut() {
 function checkBalanceUnder5() {
     if (balance < 5) {
         // prompt the user to cash out
-        alert("You have less than $5 in your balance. Please cash out now. Thank you!");
-        document.getElementById("info").innerText = "You have less than $5 in your balance and can no longer play. Please cash out!";
+        // update the innerText value of infoOverlayHidden
+        document.getElementById("infoOverlayHidden").innerText = `You have less than $5 in your balance. Please cash out now. Thank you!`;
+        displayInfo();
     }
 }
 
@@ -605,10 +663,116 @@ function setMaxBet() {
         document.getElementById("bet").innerText = bet;
     }
     else {
-        alert("You can't bet less than $5!");
+
+        // update the innerText of the div with id 'infoOverlayHidden'
+        document.getElementById("infoOverlayHidden").innerText = `You can't bet less than $5!`;
+        displayInfo();
     }
 
 }
 
 // attach setMaxBet() as a click eventlistener to the button with id 'maxbet'
 document.getElementById("maxbet").addEventListener("click", setMaxBet);
+
+// add a click event listener to the img with 'id' spinWheel that calls the play function
+document.getElementById("spinWheel").addEventListener("click", play);
+
+function startSpinWheelAnimation(){
+    document.getElementById("spinWheel").classList.add("spinning");
+}
+
+function endSpinWheelAnimation() {
+    // add an animationend event listener to the img with 'id' spinWheel that removes class .spinning from the img
+    document.getElementById("spinWheel").addEventListener("animationend", function() {
+        document.getElementById("spinWheel").classList.remove("spinning");
+    });
+}
+endSpinWheelAnimation()
+
+music.muted = true;
+music.loop = true;
+wheelSFX.muted = true;
+
+// add an eventlistener that checks if the user has clicked the button with id 'music'
+document.getElementById("music").addEventListener("click", function() {
+    // check if music is muted
+    if (music.muted) {
+        // if true, unmute music
+        music.muted = false;
+        // call music play
+        music.play();
+        // change the src of the img with id 'music' to the src of the img with name 'musicoff
+        document.getElementById("music").src = "assets/slotmachineframe/musicoff.svg";
+    }
+    else {
+        // if false, mute music
+        music.muted = true;
+        // call music pause
+        music.pause();
+        // change the src of the img with id 'music' to the src of the img with name 'musicon
+        document.getElementById("music").src = "assets/slotmachineframe/musicon.svg";
+    }
+
+});
+
+
+// add an eventlistener that checks if the button with id 'sound' is clicked
+document.getElementById("sound").addEventListener("click", function() {
+    // check if sound is muted
+    if (wheelSFX.muted) {
+        // if true, unmute sound
+        wheelSFX.muted = false;
+        cashoutSFX.muted = false;
+        jackpotSFX.muted = false;
+        clickSFX.muted = false;
+
+        // change the src of the img with id 'sound' to the src of the img with name 'soundoff
+        document.getElementById("sound").src = "assets/slotmachineframe/soundoff.svg";
+    }
+    else {
+        // if false, mute sound
+        wheelSFX.muted = true;
+        cashoutSFX.muted = true;
+        jackpotSFX.muted = true;
+        clickSFX.muted = true;
+
+        // change the src of the img with id 'sound' to the src of the img with name 'soundon
+        document.getElementById("sound").src = "assets/slotmachineframe/soundon.svg";
+    }
+})
+
+// function that plays back the clickSFX sound
+function playClickSFX() {
+    clickSFX.play();
+}
+
+// function that plays back the wheelSFX sound
+function playWheelSFX() {
+    wheelSFX.play();
+}
+
+// function that plays back the cashoutSFX sound
+function playCashoutSFX() {
+    cashoutSFX.play();
+}
+
+// function that plays back the jackpotSFX sound
+function playJackpotSFX() {
+    jackpotSFX.play();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
