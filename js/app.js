@@ -693,53 +693,66 @@ music.muted = true;
 music.loop = false;
 wheelSFX.muted = true;
 
-// add an eventlistener that checks if the user has clicked the button with id 'music'
-document.getElementById("music").addEventListener("click", function() {
-    // check if music is muted
-    if (music.muted) {
-        // if true, unmute music
-        music.muted = false;
-        // call music play
-        music.play();
-        // change the src of the img with id 'music' to the src of the img with name 'musicoff
-        document.getElementById("music").src = "assets/slotmachineframe/musicoff.svg";
+document.addEventListener('DOMContentLoaded', init, false);
+function init(){
+    function message () {
+        alert("Hello!");
     }
-    else {
-        // if false, mute music
-        music.muted = true;
-        // call music pause
-        music.pause();
-        // change the src of the img with id 'music' to the src of the img with name 'musicon
-        document.getElementById("music").src = "assets/slotmachineframe/musicon.svg";
-    }
+    musicAndSoundListener()
+    message()
+};
 
-});
+function musicAndSoundListener() {
+    // add an eventlistener that checks if the user has clicked the button with id 'music'
+    document.getElementById("music").addEventListener("click", function() {
+        // check if music is muted
+        if (music.muted) {
+            // if true, unmute music
+            music.muted = false;
+            // call music play
+            music.play();
+            // change the src of the img with id 'music' to the src of the img with name 'musicoff
+            document.getElementById("music").src = "assets/slotmachineframe/musicoff.svg";
+        }
+        else {
+            // if false, mute music
+            music.muted = true;
+            // call music pause
+            music.pause();
+            // change the src of the img with id 'music' to the src of the img with name 'musicon
+            document.getElementById("music").src = "assets/slotmachineframe/musicon.svg";
+        }
+
+    });
 
 
 // add an eventlistener that checks if the button with id 'sound' is clicked
-document.getElementById("sound").addEventListener("click", function() {
-    // check if sound is muted
-    if (wheelSFX.muted) {
-        // if true, unmute sound
-        wheelSFX.muted = false;
-        cashoutSFX.muted = false;
-        jackpotSFX.muted = false;
-        clickSFX.muted = false;
+    document.getElementById("sound").addEventListener("click", function() {
+        // check if sound is muted
+        if (wheelSFX.muted) {
+            // if true, unmute sound
+            wheelSFX.muted = false;
+            cashoutSFX.muted = false;
+            jackpotSFX.muted = false;
+            clickSFX.muted = false;
 
-        // change the src of the img with id 'sound' to the src of the img with name 'soundoff
-        document.getElementById("sound").src = "assets/slotmachineframe/soundoff.svg";
-    }
-    else {
-        // if false, mute sound
-        wheelSFX.muted = true;
-        cashoutSFX.muted = true;
-        jackpotSFX.muted = true;
-        clickSFX.muted = true;
+            // change the src of the img with id 'sound' to the src of the img with name 'soundoff
+            document.getElementById("sound").src = "assets/slotmachineframe/soundoff.svg";
+        }
+        else {
+            // if false, mute sound
+            wheelSFX.muted = true;
+            cashoutSFX.muted = true;
+            jackpotSFX.muted = true;
+            clickSFX.muted = true;
 
-        // change the src of the img with id 'sound' to the src of the img with name 'soundon
-        document.getElementById("sound").src = "assets/slotmachineframe/soundon.svg";
-    }
-})
+            // change the src of the img with id 'sound' to the src of the img with name 'soundon
+            document.getElementById("sound").src = "assets/slotmachineframe/soundon.svg";
+        }
+    })
+
+
+}
 
 // function that plays back the clickSFX sound
 function playClickSFX() {
