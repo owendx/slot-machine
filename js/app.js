@@ -47,8 +47,8 @@ document.getElementById("autoplay").addEventListener("click", playClickSFX);
 document.getElementById("increaseBet").addEventListener("click", playClickSFX);
 document.getElementById("decreaseBet").addEventListener("click", playClickSFX);
 document.getElementById("cashout").addEventListener("click", playClickSFX);
-document.getElementById("music").addEventListener("click", playClickSFX);
-document.getElementById("sound").addEventListener("click", playClickSFX);
+// document.getElementById("music").addEventListener("click", playClickSFX);
+// document.getElementById("sound").addEventListener("click", playClickSFX);
 
 
 
@@ -693,14 +693,7 @@ music.muted = true;
 music.loop = false;
 wheelSFX.muted = true;
 
-document.addEventListener('DOMContentLoaded', init, false);
-function init(){
-    function message () {
-        alert("Hello!");
-    }
-    musicAndSoundListener()
-    message()
-};
+
 
 function musicAndSoundListener() {
     // add an eventlistener that checks if the user has clicked the button with id 'music'
@@ -753,6 +746,7 @@ function musicAndSoundListener() {
 
 
 }
+musicAndSoundListener()
 
 // function that plays back the clickSFX sound
 function playClickSFX() {
@@ -773,6 +767,8 @@ function playCashoutSFX() {
 function playJackpotSFX() {
     jackpotSFX.play();
 }
+
+
 
 
 
