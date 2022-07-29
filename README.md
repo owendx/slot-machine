@@ -39,7 +39,7 @@ There are **9 symbols** that may appear in the reels when the slot machine is pl
 
 ### Slot Machine Description
 
-The slot machine is rendered on the page using a design powered by CSS Grid and Flexbox. The slot machine features 4 reels loaded with 9 symbols.
+The slot machine is rendered on the page using a design powered by CSS Grid and Flexbox. The slot machine features 3 reels, each reel loaded with 9 symbols.
 
 When the page is first loaded, the buttons and reels are not initially active. The live console/info box prompts the user to enter their starting bet, via a prompt.
 

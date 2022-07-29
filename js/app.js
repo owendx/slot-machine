@@ -690,7 +690,7 @@ function endSpinWheelAnimation() {
 endSpinWheelAnimation()
 
 music.muted = true;
-music.loop = false;
+music.loop = true;
 wheelSFX.muted = true;
 
 
