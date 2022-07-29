@@ -65,6 +65,7 @@ There are several features planned to be implemented to the slot machine in the 
     2. Force the reels to match, resulting in jackpot
     3. Freezing one or multiple reels to prevent them from spinning
 * Implementation of a cash voucher function which allows users to cash out their winnings in the form of code voucher, which can be entered back into the slot machine as a credit balance for continued play.
+* Animating the jackpot message image to make it more aesthetically pleasing
 
 ### Wireframe
 <img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-wireframe.png" />
