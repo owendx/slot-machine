@@ -63,10 +63,6 @@
     font-size: 75px;
 }
 
-.spinner {
-    transform: translateY(50%);
-    transition: transform 2s ease-in-out;
-}
 
 .nudgeReelLow {
     transform: translateY(-583.22px);
@@ -136,6 +132,14 @@
     font-size: 25px;
 }
 
+#balance, #winnings, #cashoutWindow {
+    font-size: 75px;
+}
+
+#bet {
+    font-size: 50px;
+}
+
 .header {
     background-color: black;
     color: white;
@@ -167,7 +171,7 @@
     justify-content: space-around;
 }
 
-#increaseBet, #decreaseBet {
+#increaseBet, #decreaseBet, #maxbet {
     box-shadow:inset 0px 1px 0px 0px #54a3f7;
     background: #007dc1 linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
     border-radius:3px;
@@ -183,14 +187,20 @@
     margin: 4px;
 }
 
-#increaseBet:hover, #decreaseBet:hover {
+#increaseBet:hover, #decreaseBet:hover, #maxbet:hover {
     background: #0061a7 linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
 }
 
-#increaseBet:active, #decreaseBet:active {
+#increaseBet:active, #decreaseBet:active, #maxbet:active {
     position:relative;
     top:1px;
 }
+
+img {
+    width: 125px;
+    height: 125px;
+}
+
 
 
 
