@@ -690,7 +690,7 @@ function endSpinWheelAnimation() {
 endSpinWheelAnimation()
 
 music.muted = true;
-// music.loop = true;
+music.loop = false;
 wheelSFX.muted = true;
 
 // add an eventlistener that checks if the user has clicked the button with id 'music'
