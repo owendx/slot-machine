@@ -73,7 +73,7 @@ There are several features planned to be implemented to the slot machine in the 
 [Link to view wireframe on Whimsical: https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx](https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx)
  
 ### Game Flow 
-<img src="https://hedonic.life/wp-content/uploads/2022/07/Slot-Machine-Game-Flow@2x.png" />
+<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-game-flow-2.png" />
 
 
 
