@@ -3,6 +3,7 @@
 // reference of images to be used as symbols in the slot machine
 const symbols = ["assets/symbols/anchor.svg", "assets/symbols/bomb.svg", "assets/symbols/coin.svg", "assets/symbols/flag.svg", "assets/symbols/hat.svg", "assets/symbols/skull.svg", "assets/symbols/treasure.svg", "assets/symbols/a.svg", "assets/symbols/10.svg"];
 const numberOfReels = 3;
+const askUserForStartingBalance = false;
 const music = new Audio("assets/sound/music.mp3");
 const cashoutSFX = new Audio("assets/sound/cashout.wav");
 const jackpotSFX = new Audio("assets/sound/jackpot.wav");
@@ -11,7 +12,7 @@ const clickSFX = new Audio("assets/sound/click.wav");
 
 
 /*----- app's state (variables) -----*/
-let balance = 100;
+let balance = 1000;
 let bet = 5;
 let winnings = 0;
 let cashout = 0;
@@ -68,7 +69,11 @@ function initialBalance() {
     balance = promptUserForBalance();
     updateBalanceInfo();
 }
-initialBalance()
+
+if (askUserForStartingBalance) {
+    initialBalance();
+}
+
 
 // function that updates the div with id 'balance' to the current value of balance
 function updateBalanceInfo(){
