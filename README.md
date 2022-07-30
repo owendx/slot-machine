@@ -21,7 +21,7 @@ A slot machine powered by HTML, CSS and Javascript.
 A slot machine is a gambling device in which the player must match a set of three symbols to win. In some locales, slot machines are known as "one-armed bandits" because of the handle that is used to pull the lever on traditional slot machines, and the tendency for users to lose all their money playing them.
 
 ### Screenshots
-<img src="https://hedonic.life/wp-content/uploads/2022/07/pirateslotmachine.png" />
+<img src="https://hedonic.life/wp-content/uploads/2022/07/mainui.png" />
 <img src="https://hedonic.life/wp-content/uploads/2022/07/jackpotscreenshot.png" />
 <img src="https://hedonic.life/wp-content/uploads/2022/07/cashoutmessage.png" />
 
