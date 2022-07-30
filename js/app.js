@@ -697,6 +697,8 @@ endSpinWheelAnimation()
 music.muted = true;
 music.loop = true;
 wheelSFX.muted = true;
+cashoutSFX.volume = 0.60;
+jackpotSFX.volume = 0.50;
 
 
 
