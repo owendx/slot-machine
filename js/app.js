@@ -171,7 +171,7 @@ function addRandomImages() {
         let numberOfDisplays = slotMachineWindows[i].getElementsByClassName("display").length;
         // assign each value from setOfImages to each div with class 'display'
         for (let j = 0; j < numberOfDisplays; j++) {
-            slotMachineWindows[i].getElementsByClassName("display")[j].innerHTML = `<img src="${setOfImages[j % setOfImages.length]}" alt="symbol">`;
+            slotMachineWindows[i].getElementsByClassName("display")[j].innerHTML = `<img class="reelSymbol" src="${setOfImages[j % setOfImages.length]}" alt="symbol">`;
         }
     }
 }

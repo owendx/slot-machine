@@ -145,6 +145,10 @@ body {
     filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.5));
 }
 
+.reelSymbol {
+    filter: drop-shadow(5px 7px 4px rgb(0 0 0 / 0.8));
+}
+
 .spinning {
     animation: spin 2s ease-in-out forwards;
 }
