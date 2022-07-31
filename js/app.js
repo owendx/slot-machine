@@ -3,7 +3,7 @@
 // reference of images to be used as symbols in the slot machine
 const symbols = ["assets/symbols/anchor.svg", "assets/symbols/bomb.svg", "assets/symbols/coin.svg", "assets/symbols/flag.svg", "assets/symbols/hat.svg", "assets/symbols/skull.svg", "assets/symbols/treasure.svg", "assets/symbols/a.svg", "assets/symbols/10.svg"];
 const numberOfReels = 3;
-const askUserForStartingBalance = false;
+const askUserForStartingBalance = true;
 const music = new Audio("assets/sound/music.mp3");
 const cashoutSFX = new Audio("assets/sound/cashout.wav");
 const jackpotSFX = new Audio("assets/sound/jackpot.wav");
@@ -14,7 +14,7 @@ const clickSFX = new Audio("assets/sound/click.wav");
 
 
 /*----- app's state (variables) -----*/
-let balance = 1000;
+let balance = null;
 let bet = 5;
 let winnings = 0;
 let cashout = 0;
@@ -64,24 +64,6 @@ document.getElementById("sound").addEventListener("click", playClickSFX);
 
 /*----- functions -----*/
 
-// prompt the user to enter their starting balance
-function promptUserForBalance() {
-    let startingBalance;
-    do {
-        startingBalance = prompt("How much do you want to put into the slot machine?: \n (Minimum of 5 and maximum of 1000, only dollar bills can be inserted!)");
-    } while (isNaN(startingBalance) || startingBalance === null || startingBalance === "" || startingBalance < 5 || startingBalance > 1000);
-
-    return Math.floor(startingBalance);
-}
-// on page load, this function prompts the user for their starting balance and updates the initial balance accordingly
-function initialBalance() {
-    balance = promptUserForBalance();
-    updateBalanceInfo();
-}
-
-if (askUserForStartingBalance) {
-    initialBalance();
-}
 
 // function that updates the div with id 'balance' to the current value of balance
 function updateBalanceInfo(){
@@ -854,6 +836,8 @@ function displayTutorial() {
     document.getElementById("next").addEventListener("click", function() {
         currentTutorialPage++;
 
+
+
         // replace the innerHTML of the div with class 'tutorialPage' with the html of the next tutorial step
         // from the tutorialSteps array
         document.querySelector(".tutorialPage").innerHTML = tutorialSteps[currentTutorialPage];
@@ -880,9 +864,12 @@ function displayTutorial() {
          if (currentTutorialPage === tutorialSteps.length) {
              // close the tutorial when next is clicked on the last tutorial page
                 closeTutorial();
+                if (askUserForStartingBalance) {
+                    // display the starting balance prompt
+                    displayStartingBalancePrompt();
+                }
          }
 
-        // currentTutorialPage++;
     });
 
     // attach an event listener to the img with id 'previous' that removes the div with class 'tutorialPage' and from the
@@ -912,6 +899,64 @@ function displayTutorial() {
         }
     });
 }
+
+function displayStartingBalancePrompt() {
+    // display a prompt to the user to enter a starting balance
+    document.getElementById("infoOverlayHidden").innerHTML = "<div id='balanceMessage'>How much do you want to put into the slot machine?: <br> (Minimum of 5 and maximum of 1000)</div>";
+    displayBalancePrompt()
+
+    function createInputField(){
+        // create a new input field
+        let inputField = "<div><input type='number' id='inputBalance'></div>"
+        // append the input field to the start of the div with id 'infoOverlayDisplayed'
+        document.getElementById("infoOverlayDisplayed").appendChild(document.createRange().createContextualFragment(inputField));
+        // move the div with id 'enterButtonDiv' to the bottom of the div with id 'infoOverlayDisplayed'
+        document.getElementById("infoOverlayDisplayed").appendChild(document.getElementById("enterButtonDiv"));
+    }
+
+    let enterButton = "<div id='enterButtonDiv'><img id='enterBalance' src='/assets/imgs/tutorial/enter.svg'></div>";
+    //append the enter button to the div with id 'infoOverlayHidden'
+    document.getElementById("infoOverlayDisplayed").appendChild(document.createRange().createContextualFragment(enterButton));
+
+    createInputField();
+    document.querySelector("#enterBalance").addEventListener("click", function () {
+        inputChecker();
+        function inputChecker() {
+            let startingBalance = document.getElementById("inputBalance").value;
+            if (startingBalance === "") {
+                // update the innerText of the div with id 'balanceMessage' to tell the user that they didn't enter an amount
+                document.getElementById("balanceMessage").innerText = "You didn't enter an amount. \n Please enter an amount between 5 and 1000.";
+            }
+            else if (startingBalance > 1000) {
+                // update the innerText of the div with id 'balanceMessage' to tell the user that their balance is too high
+                document.getElementById("balanceMessage").innerText = "Your entered amount is too high. \n Please enter an amount between 5 and 1000.";
+            }
+            else if (startingBalance < 5) {
+                // update the innerText of the div with id 'balanceMessage' to tell the user that their balance is too low
+                document.getElementById("balanceMessage").innerText = "Your entered amount is too low. \n Please enter an amount between 5 and 1000.";
+            }
+            else {
+                // set the value of the variable 'balance' to the value of the input with id 'inputBalance'
+                balance = Math.floor(startingBalance);
+                updateBalanceInfo();
+                // close the infoOverlay
+                closeTutorial();
+            }
+        }
+    });
+}
+
+function displayBalancePrompt() {
+    // change the opacity of the div with id 'container' to 0.1
+    document.getElementById("container").style.opacity = 0.1;
+    document.getElementById("container").style.filter = "brightness(opacity=20)";
+
+    // retrieve the div with id 'infoOverlay', and change its id to 'infoOverlayDisplayed'
+    let infoOverlay = document.getElementById("infoOverlayHidden");
+    infoOverlay.id = "infoOverlayDisplayed";
+
+}
+
 
 
 
