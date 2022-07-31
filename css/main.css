@@ -1,72 +1,72 @@
 #container {
-    display: flex;
     align-items: center;
+    display: flex;
     justify-content: center;
     margin: 40px 40px 15px 40px;
+    -moz-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    zoom: 0.8; /* Old IE only */
 }
 
 body {
     background-image: url(/assets/slotmachineframe/reel3.svg);
+    background-color: #451502; /* used as backup background in case background-image doesn't load properly */
 }
 
 #slot-machine {
     display: flex;
-    width: 1000px;
-    height: 700px;
     position: relative;
-    top: 207px;
     right: 48px;
+    top: 207px;
+    height: 800px;
+    width: 800px;
 }
 
 .slot-machine-reel {
-    width: 300px;
-    height: 625px;
+    align-items: center;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    height: 625px;
     justify-items: center;
     overflow: hidden;
-    flex-direction: row;
-    flex-wrap: wrap;
     text-orientation: upright;
-    flex-shrink: 0;
+    width: 300px;
 }
 
 .slot-machine-window {
-    width: 100%;
-    height: 1750px;
     border:solid 1px black;
+    display:flex;
+    flex-direction: column;
+    height: 1750px;
+    justify-content: flex-start;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
-    display:flex;
-    justify-content: flex-start;
-    flex-direction: column;
-
+    width: 100%;
 }
 
 .displaySet {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     font-size: 20px;
+    justify-content: flex-start;
     width:100%;
-    /*height: 100%;*/
-
-
 }
 
 .displaySet > div {
-    height: 200px;
-    width:100%;
-    display:flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    font-size: 75px;
     background-image: url(/assets/slotmachineframe/reel1.svg);
-    /*padding: 7px 0;*/
+    display:flex;
+    font-size: 75px;
+    height: 200px;
+    justify-content: center;
+    text-align: center;
+    width:100%;
 }
 
 .nudgeReelLow {
@@ -89,20 +89,22 @@ body {
     transition: transform 2s ease-in-out;
 }
 
-
-#balance, #winnings, #cashoutWindow {
+#cashoutWindow {
     font-size: 75px;
 }
 
 #bet {
     font-size: 50px;
+    position: relative;
+    right: 120px;
+    width: 75px;
 }
 
 #betBox {
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 
 }
 
@@ -116,35 +118,31 @@ body {
 
 #buttonRow {
     display: flex;
-    width: 600px;
     justify-content: space-around;
+    width: 600px;
 }
-
 
 #increaseBet:hover, #decreaseBet:hover, #maxbet:hover {
     /*background: #0061a7 linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);*/
 }
 
 #increaseBet:active, #decreaseBet:active, #maxbet:active, #previous:active, #next:active {
+    cursor: pointer;
     position:relative;
     top:1px;
-    cursor: pointer;
 }
 
 .display > img {
-    width: 175px;
     height: 175px;
-}
-
-#slot-machine {
-    width: 800px;
-    height: 800px;
+    width: 175px;
 }
 
 #pirateframe {
-    transform: scale(1, 1.35);
     filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.5));
+    transform: scale(1, 1.35);
 }
+
+
 
 .reelSymbol {
     filter: drop-shadow(5px 7px 4px rgb(0 0 0 / 0.8));
@@ -173,8 +171,8 @@ body {
 }
 
 #decreaseBet, #increaseBet, #maxbet, #autoplay, #cashout, #spinWheel, #music, #sound, #previous, #next {
-    filter: drop-shadow(5px 7px 3px rgb(0 0 0 / 0.8));
     cursor: pointer;
+    filter: drop-shadow(5px 7px 3px rgb(0 0 0 / 0.8));
 }
 
 .tutorialbalance, .tutorialbet, .tutorialcashout, .tutorialmainui, .tutorialmusic, .tutorialspin, .tutorialwin {
@@ -190,22 +188,16 @@ body {
 }
 
 #left {
-    flex-grow: 0.75;
-    justify-content: center;
     flex-direction: column;
+    flex-grow: 0.3;
+    justify-content: center;
 }
 
 .betBox, .betButtonsBox, .winBox, .balanceBox {
-    display: flex;
     align-items: center;
+    display: flex;
     justify-items: center;
 
-}
-
-#bet {
-    position: relative;
-    right: 120px;
-    width: 75px;
 }
 
 .betBox {
@@ -213,8 +205,8 @@ body {
 }
 
 .betButtonsBox {
-    position: relative;
     left: -40px;
+    position: relative;
     top: -10px;
 }
 
@@ -223,54 +215,54 @@ img#spinWheel {
 }
 
 #decreaseBet {
-    position: relative;
     left: -20px;
+    position: relative;
 }
 
 #winnings {
-    width: 75px;
     position: relative;
     right: 125px;
+    width: 75px;
 }
 
 #balance  {
-    width: 75px;
     position: relative;
     right: 150px;
+    width: 75px;
 }
 
 #left {
-    display: flex;
     align-items: center;
+    display: flex;
 }
 #right {
     right: -30px;
 }
 
 .spinBox {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
     height: 100%;
+    justify-content: flex-start;
     margin-bottom: 10px;
+    width: 100%;
 }
 
 #autoplay {
     cursor: pointer;
 }
 
-#autoplay:active, #cashout:active, #music:active, #sound:active {
+#autoplay:active, #cashout:active, #music:active, #sound:active, .continueButton:active {
+    cursor: pointer;
     position:relative;
     top:1px;
-    cursor: pointer;
 }
 
 #spinWheel:active {
+    cursor: pointer;
     position:relative;
     top:-46px;
-    cursor: pointer;
 }
 
 #spinWheel {;
@@ -279,43 +271,50 @@ img#spinWheel {
 }
 
 #cashout {
+    left: -20px;
     padding-top: 15px;
     position: relative;
-    left: -20px;
 }
 
 #music {
     padding-top: 15px;
 }
 
-#info {
-    width: 100%;
-    height: 155px;
+#bottomframe {
     background-image: url(/assets/slotmachineframe/woodtexture.svg);
-    background-size: cover;
     background-repeat: round;
+    background-size: cover;
+    height: 155px;
     position: relative;
     top: 15px;
+    width: 100%;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.5));
 }
 
 #jackpotDisplayed, #infoOverlayDisplayed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    animation: fadeIn 0.5s ease-in-out forwards;
-    display: block;
-    font-size: 50px;
-    color: white;
-    font-family: 'Julee', cursive;
-    text-align: center;
     align-content: center;
     align-self: center;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    color: white;
+    display: block;
+    font-family: 'Julee', cursive;
+    font-size: 50px;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
 }
 
 #infoOverlayDisplayed {
-    padding-top: 75px;
+    -moz-transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+}
+
+#infoOverlayDisplayed {
+    padding-top: 40px;
 }
 
 #jackpotHidden {
@@ -331,85 +330,50 @@ img#spinWheel {
 }
 
 #fullscreenFlexContainer {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
+    display: flex;
     height: 100%;
-    top: 0;
+    justify-content: center;
     left: 0;
+    top: 0;
+    width: 100%;
 }
 
 .tutorial {
-    margin-top: 20px;
     border: 8px solid black;
+    margin-top: 20px;
 }
 
-#previous:hover, #next:hover, #decreaseBet:hover, #increaseBet:hover, #maxbet:hover, #autoplay:hover, #cashout:hover, #spinWheel:hover, #music:hover, #sound:hover{
+#previous:hover, #next:hover, #decreaseBet:hover, #increaseBet:hover, #maxbet:hover, #autoplay:hover, #cashout:hover, #spinWheel:hover, #music:hover, #sound:hover, .continueButton:hover {
     filter: brightness(0.6);
 }
 
-.bg-mainui {
-    width: 1058px; height: 600px;
-    background: url('/css_sprites.png') -10px -10px;
-}
-
-.bg-tutorialbalance {
-    width: 500px; height: 287px;
-    background: url('/css_sprites.png') -530px -10px;
-}
-
-.bg-tutorialbet {
-    width: 500px; height: 287px;
-    background: url('/css_sprites.png') -10px -317px;
-}
-
-.bg-tutorialcashout {
-    width: 500px; height: 287px;
-    background: url('/css_sprites.png') -530px -317px;
-}
-
-.bg-tutorialsound {
-    width: 500px; height: 287px;
-    background: url('/css_sprites.png') -10px -624px;
-}
-
-.bg-tutorialspin {
-    width: 500px; height: 287px;
-    background: url('/css_sprites.png') -530px -624px;
-}
-
-.bg-tutorialwin {
-    width: 500px; height: 287px;
-    background: url('/css_sprites.png') -1050px -10px;
-}
-
 .tutorialbalance, .tutorialbet, .tutorialcashout, .tutorialmainui, .tutorialmusic, .tutorialspin, .tutorialwin
-{ display: inline-block; background: url('/assets/imgs/tutorial/spritesheet.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+{ background: url('/assets/imgs/tutorial/spritesheet.png') no-repeat; display: inline-block; overflow: hidden; text-align: left; text-indent: -9999px; }
 
-.tutorialbalance { background-position: -0px -0px; width: 1058px; height: 600px; }
-.tutorialbet { background-position: -1058px -0px; width: 1058px; height: 600px; }
-.tutorialcashout { background-position: -0px -600px; width: 1058px; height: 600px; }
-.tutorialmainui { background-position: -1058px -600px; width: 1058px; height: 600px; }
-.tutorialmusic { background-position: -0px -1200px; width: 1058px; height: 600px; }
-.tutorialspin { background-position: -1058px -1200px; width: 1058px; height: 600px; }
-.tutorialwin { background-position: -0px -1800px; width: 1058px; height: 600px; }
+.tutorialbalance { background-position: -0px -0px; height: 600px; width: 1058px; }
+.tutorialbet { background-position: -1058px -0px; height: 600px; width: 1058px; }
+.tutorialcashout { background-position: -0px -600px; height: 600px; width: 1058px; }
+.tutorialmainui { background-position: -1058px -600px; height: 600px; width: 1058px; }
+.tutorialmusic { background-position: -0px -1200px; height: 600px; width: 1058px; }
+.tutorialspin { background-position: -1058px -1200px; height: 600px; width: 1058px; }
+.tutorialwin { background-position: -0px -1800px; height: 600px; width: 1058px; }
 
 .tutorialbalance, .tutorialbet, .tutorialcashout, .tutorialmainui, .tutorialmusic, .tutorialspin, .tutorialwin {
     margin-top: 20px;
 }
 
 .infoText {
-    width: 75%;
     margin: auto;
+    width: 75%;
 }
 
-.darken {
-    filter: brightness(0.3);
+.continueButton {
+    display: block;
+    margin: auto;
+    padding: 40px;
+    height: 75px;
 }
-
-
-
 
 
 

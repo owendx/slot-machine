@@ -28,6 +28,7 @@ cashoutSFX.muted = true;
 jackpotSFX.muted = true;
 clickSFX.muted = true;
 
+
 /*----- cached element references -----*/
 
 
@@ -241,67 +242,19 @@ function nudgeReel() {
     }
 }
 
+function retrieveCurrentDisplayValues(displaySet){
+    // loop through all divs with class 'display' and assign their innerHTML to counting variables, starting from 'display1'
+    // only loop through the div with class 'displaySet'
+    for (let i = 0; i < displaySet.getElementsByClassName("display").length; i++) {
+        this[`display${i+1}`] = displaySet.getElementsByClassName("display")[i].innerHTML;
+    }
+}
 
 function shiftDisplaysBy3(displaySet) {
     // remap the innerHTML of each div with class 'display' to a corresponding div with class 'display' under the div with class 'displaySet'
-    // retrieve the innerHTML of div with class 'display1' under the div with class 'displaySet'
-    let display1 = displaySet.getElementsByClassName("display1")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display2' under the div with class 'displaySet'
-    let display2 = displaySet.getElementsByClassName("display2")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display3' under the div with class 'displaySet'
-    let display3 = displaySet.getElementsByClassName("display3")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display4' under the div with class 'displaySet'
-    let display4 = displaySet.getElementsByClassName("display4")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display5' under the div with class 'displaySet'
-    let display5 = displaySet.getElementsByClassName("display5")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display6' under the div with class 'displaySet'
-    let display6 = displaySet.getElementsByClassName("display6")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display7' under the div with class 'displaySet'
-    let display7 = displaySet.getElementsByClassName("display7")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display8' under the div with class 'displaySet'
-    let display8 = displaySet.getElementsByClassName("display8")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display9' under the div with class 'displaySet'
-    let display9 = displaySet.getElementsByClassName("display9")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display10' under the div with class 'displaySet'
-    let display10 = displaySet.getElementsByClassName("display10")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display11' under the div with class 'displaySet'
-    let display11 = displaySet.getElementsByClassName("display11")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display12' under the div with class 'displaySet'
-    let display12 = displaySet.getElementsByClassName("display12")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display13' under the div with class 'displaySet'
-    let display13 = displaySet.getElementsByClassName("display13")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display14' under the div with class 'displaySet'
-    let display14 = displaySet.getElementsByClassName("display14")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display15' under the div with class 'displaySet'
-    let display15 = displaySet.getElementsByClassName("display15")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display16' under the div with class 'displaySet'
-    let display16 = displaySet.getElementsByClassName("display16")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display17' under the div with class 'displaySet'
-    let display17 = displaySet.getElementsByClassName("display17")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display18' under the div with class 'displaySet'
-    let display18 = displaySet.getElementsByClassName("display18")[0].innerHTML;
+    // displays are effectively shifted by 3 divs
 
-
-    // clear the innerHTML of each div with class 'display' under the div with class 'displaySet'
-    displaySet.getElementsByClassName("display1")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display2")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display3")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display4")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display5")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display6")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display7")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display8")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display9")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display10")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display11")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display12")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display13")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display14")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display15")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display16")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display17")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display18")[0].innerHTML = "";
-
+    retrieveCurrentDisplayValues(displaySet);
 
     // assign the innerHTML of each div with class 'display' under the div with class 'displaySet'
     // assign the innerHTML of display9 to the innerHTML of div with class 'display6'
@@ -345,63 +298,9 @@ function shiftDisplaysBy3(displaySet) {
 
 function shiftDisplaysBy5(displaySet) {
     // remap the innerHTML of each div with class 'display' to a corresponding div with class 'display' under the div with class 'displaySet'
-    // retrieve the innerHTML of div with class 'display1' under the div with class 'displaySet'
-    let display1 = displaySet.getElementsByClassName("display1")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display2' under the div with class 'displaySet'
-    let display2 = displaySet.getElementsByClassName("display2")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display3' under the div with class 'displaySet'
-    let display3 = displaySet.getElementsByClassName("display3")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display4' under the div with class 'displaySet'
-    let display4 = displaySet.getElementsByClassName("display4")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display5' under the div with class 'displaySet'
-    let display5 = displaySet.getElementsByClassName("display5")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display6' under the div with class 'displaySet'
-    let display6 = displaySet.getElementsByClassName("display6")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display7' under the div with class 'displaySet'
-    let display7 = displaySet.getElementsByClassName("display7")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display8' under the div with class 'displaySet'
-    let display8 = displaySet.getElementsByClassName("display8")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display9' under the div with class 'displaySet'
-    let display9 = displaySet.getElementsByClassName("display9")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display10' under the div with class 'displaySet'
-    let display10 = displaySet.getElementsByClassName("display10")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display11' under the div with class 'displaySet'
-    let display11 = displaySet.getElementsByClassName("display11")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display12' under the div with class 'displaySet'
-    let display12 = displaySet.getElementsByClassName("display12")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display13' under the div with class 'displaySet'
-    let display13 = displaySet.getElementsByClassName("display13")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display14' under the div with class 'displaySet'
-    let display14 = displaySet.getElementsByClassName("display14")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display15' under the div with class 'displaySet'
-    let display15 = displaySet.getElementsByClassName("display15")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display16' under the div with class 'displaySet'
-    let display16 = displaySet.getElementsByClassName("display16")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display17' under the div with class 'displaySet'
-    let display17 = displaySet.getElementsByClassName("display17")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display18' under the div with class 'displaySet'
-    let display18 = displaySet.getElementsByClassName("display18")[0].innerHTML;
+    // displays are effectively shifted by 5 divs
 
-
-    // clear the innerHTML of each div with class 'display' under the div with class 'displaySet'
-    displaySet.getElementsByClassName("display1")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display2")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display3")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display4")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display5")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display6")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display7")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display8")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display9")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display10")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display11")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display12")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display13")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display14")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display15")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display16")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display17")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display18")[0].innerHTML = "";
+    retrieveCurrentDisplayValues(displaySet)
 
     // assign the innerText of display9 to the innerText of div with class 'display4'
     displaySet.getElementsByClassName("display4")[0].innerHTML = display9;
@@ -444,63 +343,9 @@ function shiftDisplaysBy5(displaySet) {
 
 function shiftDisplaysBy7(displaySet) {
     // remap the innerHTML of each div with class 'display' to a corresponding div with class 'display' under the div with class 'displaySet'
-    // retrieve the innerHTML of div with class 'display1' under the div with class 'displaySet'
-    let display1 = displaySet.getElementsByClassName("display1")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display2' under the div with class 'displaySet'
-    let display2 = displaySet.getElementsByClassName("display2")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display3' under the div with class 'displaySet'
-    let display3 = displaySet.getElementsByClassName("display3")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display4' under the div with class 'displaySet'
-    let display4 = displaySet.getElementsByClassName("display4")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display5' under the div with class 'displaySet'
-    let display5 = displaySet.getElementsByClassName("display5")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display6' under the div with class 'displaySet'
-    let display6 = displaySet.getElementsByClassName("display6")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display7' under the div with class 'displaySet'
-    let display7 = displaySet.getElementsByClassName("display7")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display8' under the div with class 'displaySet'
-    let display8 = displaySet.getElementsByClassName("display8")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display9' under the div with class 'displaySet'
-    let display9 = displaySet.getElementsByClassName("display9")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display10' under the div with class 'displaySet'
-    let display10 = displaySet.getElementsByClassName("display10")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display11' under the div with class 'displaySet'
-    let display11 = displaySet.getElementsByClassName("display11")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display12' under the div with class 'displaySet'
-    let display12 = displaySet.getElementsByClassName("display12")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display13' under the div with class 'displaySet'
-    let display13 = displaySet.getElementsByClassName("display13")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display14' under the div with class 'displaySet'
-    let display14 = displaySet.getElementsByClassName("display14")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display15' under the div with class 'displaySet'
-    let display15 = displaySet.getElementsByClassName("display15")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display16' under the div with class 'displaySet'
-    let display16 = displaySet.getElementsByClassName("display16")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display17' under the div with class 'displaySet'
-    let display17 = displaySet.getElementsByClassName("display17")[0].innerHTML;
-    // retrieve the innerHTML of div with class 'display18' under the div with class 'displaySet'
-    let display18 = displaySet.getElementsByClassName("display18")[0].innerHTML;
+    // displays are effectively shifted by 7 divs
 
-
-    // clear the innerHTML of each div with class 'display' under the div with class 'displaySet'
-    displaySet.getElementsByClassName("display1")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display2")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display3")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display4")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display5")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display6")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display7")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display8")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display9")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display10")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display11")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display12")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display13")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display14")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display15")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display16")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display17")[0].innerHTML = "";
-    displaySet.getElementsByClassName("display18")[0].innerHTML = "";
+    retrieveCurrentDisplayValues(displaySet)
 
     // assign the innerHTML of display18 to the innerHTML of div with class 'display11'
     displaySet.getElementsByClassName("display11")[0].innerHTML = display18;
@@ -556,7 +401,6 @@ function shiftDisplays() {
     }
     removeNudgeReelClasses()
 }
-
 
 // we need to 'reset' the animation of each div by removing any classes that are added by the nudgeReel function
 function removeNudgeReelClasses() {
@@ -663,38 +507,55 @@ function displayInfo() {
     document.getElementById("container").style.filter = "brightness(opacity=20)";
 
     // retrieve the div with id 'infoOverlay', and change its id to 'infoOverlayDisplayed'
-    let infoOverlayHidden = document.getElementById("infoOverlayHidden");
-    infoOverlayHidden.id = "infoOverlayDisplayed";
+    let infoOverlay = document.getElementById("infoOverlayHidden");
+    infoOverlay.id = "infoOverlayDisplayed";
 
-    // if autoPlay is enabled, info message will be displayed for 5 seconds
-    if (autoPlayIsEnabled) {
-        // after 2 seconds, change the id of the img with id 'infoOverlayDisplayed' back to 'infoOverlayHidden'
+    // append the img with name 'continue.svg' to the div with id 'infoOverlayDisplayed'
+    let continueButton = document.createElement("img");
+    continueButton.src = "assets/imgs/tutorial/continue.svg";
+    continueButton.className = "continueButton";
+    infoOverlay.appendChild(continueButton);
+
+    // after 5 seconds, close the info overlay automatically
+    function autoClose() {
+        // after 5 seconds, change the id of the img with id 'infoOverlayDisplayed' back to 'infoOverlayHidden'
         setTimeout(function() {
-            infoOverlayHidden.id = "infoOverlayHidden";
-        }, 7000);
+            infoOverlay.id = "infoOverlayHidden";
+        }, 5000);
         // change the opacity of the div with id 'container' back to 1
         setTimeout(function() {
             document.getElementById("container").style.opacity = 1;
             document.getElementById("container").style.filter = "brightness(opacity=100)";
-        }, 7000);
+        }, 5000);
         // after 7 seconds, change the innerText value of the div with id 'infoOverlayDisplayed' to ' '
         setTimeout(function() {
             document.getElementById("infoOverlayHidden").innerText = " ";
-        }, 7000);
+        }, 5000);
     }
 
-    else {
-        // if autoPlay is not enabled, info message will be displayed until the user clicks the screen
-        // add an event listener to the div with id 'infoOverlayDisplayed' that listens for a click event
-        infoOverlayHidden.addEventListener("click", function() {
+    // attach a click event listener to the img with class 'continueButton' that closes the info overlay
+    function continueButtonClick() {
+        // add a click event listener to the img with class 'continueButton' that closes the info message
+        document.getElementsByClassName("continueButton")[0].addEventListener("click", function() {
             // change the id of the div with id 'infoOverlayDisplayed' to 'infoOverlayHidden'
-            infoOverlayHidden.id = "infoOverlayHidden";
+            infoOverlay.id = "infoOverlayHidden";
             // change the opacity of the div with id 'container' back to 1
             document.getElementById("container").style.opacity = 1;
             document.getElementById("container").style.filter = "brightness(opacity=100)";
             // change the innerText value of the div with id 'infoOverlayHidden' to ''
             document.getElementById("infoOverlayHidden").innerText = "";
         })
+    }
+
+    // if autoPlay is currently enabled, info message will be displayed for 5 seconds then close on its own
+    // user can also click the continue button to close the info message
+    if (autoPlayIsEnabled) {
+        autoClose();
+        continueButtonClick();
+    }
+    // if autoPlay is not enabled, info message will be displayed until the user clicks the continue button
+    else {
+        continueButtonClick();
     }
 }
 
@@ -900,7 +761,7 @@ function musicAndSoundListener() {
             // then set the volume of the sounds
             wheelSFX.volume = 0.1;
             cashoutSFX.volume = 0.3;
-            jackpotSFX.volume = 0.2;
+            jackpotSFX.volume = 0.1;
             clickSFX.volume = 0.3;
 
             // change the src of the img with id 'sound' to the src of the img with name 'soundoff
@@ -960,9 +821,9 @@ function closeTutorial() {
 
 function displayTutorial() {
 
-    const feelingLucky = '<div class="tutorialPage"><div class="infoText">Ahoy Matey! Feeling lucky?</div><div class="tutorialmainui"></div></div>';
+    const feelingLucky = '<div class="tutorialPage"><div class="infoText">Ahoy Matey! Feeling lucky?<br>Welcome to the PIRATES: SLOT MACHINE</div><div class="tutorialmainui"></div></div>';
     const tutorialSpin = '<div class="tutorialPage"><div class="infoText">Press spin to play the slot machine. Press autoplay to have the slots play automatically.</div><div class="tutorialspin"></div></div>';
-    const tutorialBet = '<div class="tutorialPage"><div class="infoText">Use the up and down buttons to increase or lower your bet. Press max bet to automatically increase your bet to your current balance.</div><div class="tutorialbet"></div></div>';
+    const tutorialBet = '<div class="tutorialPage"><div class="infoText">Use the up and down buttons to increase or lower your bet. Press max bet to increase your bet to your current balance.</div><div class="tutorialbet"></div></div>';
     const tutorialWin = '<div class="tutorialPage"><div class="infoText">Your current winnings is displayed. The amount won on every jackpot is in the amount of <b>10 times your current bet</b>. </div><div class="tutorialwin"></div></div>';
     const tutorialBalance = '<div class="tutorialPage"><div class="infoText">Your current balance is displayed. Every time you hit a jackpot, your winnings are added to your total balance.</div><div class="tutorialbalance"></div></div>';
     const tutorialCashout = '<div class="tutorialPage"><div class="infoText">Press the "cashout" button when you are ready to redeem your total balance and end your play session!</div><div class="tutorialcashout"></div></div>';
