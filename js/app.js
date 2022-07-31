@@ -914,36 +914,46 @@ function displayStartingBalancePrompt() {
         document.getElementById("infoOverlayDisplayed").appendChild(document.getElementById("enterButtonDiv"));
     }
 
+    function inputChecker() {
+        let startingBalance = document.getElementById("inputBalance").value;
+        if (startingBalance === "") {
+            // update the innerText of the div with id 'balanceMessage' to tell the user that they didn't enter an amount
+            document.getElementById("balanceMessage").innerText = "You didn't enter an amount. \n Please enter an amount between 5 and 1000.";
+        }
+        else if (startingBalance > 1000) {
+            // update the innerText of the div with id 'balanceMessage' to tell the user that their balance is too high
+            document.getElementById("balanceMessage").innerText = "Your entered amount is too high. \n Please enter an amount between 5 and 1000.";
+        }
+        else if (startingBalance < 5) {
+            // update the innerText of the div with id 'balanceMessage' to tell the user that their balance is too low
+            document.getElementById("balanceMessage").innerText = "Your entered amount is too low. \n Please enter an amount between 5 and 1000.";
+        }
+        else {
+            // set the value of the variable 'balance' to the value of the input with id 'inputBalance'
+            balance = Math.floor(startingBalance);
+            updateBalanceInfo();
+            // close the infoOverlay
+            closeTutorial();
+        }
+    }
+
     let enterButton = "<div id='enterButtonDiv'><img id='enterBalance' src='/assets/imgs/tutorial/enter.svg'></div>";
-    //append the enter button to the div with id 'infoOverlayHidden'
+    //append the enter button to the div with id 'infoOverlayDisplayed'
     document.getElementById("infoOverlayDisplayed").appendChild(document.createRange().createContextualFragment(enterButton));
 
+
     createInputField();
+    // add an event listener to the img with id 'enterBalance' that calls the function inputChecker on click
     document.querySelector("#enterBalance").addEventListener("click", function () {
         inputChecker();
-        function inputChecker() {
-            let startingBalance = document.getElementById("inputBalance").value;
-            if (startingBalance === "") {
-                // update the innerText of the div with id 'balanceMessage' to tell the user that they didn't enter an amount
-                document.getElementById("balanceMessage").innerText = "You didn't enter an amount. \n Please enter an amount between 5 and 1000.";
-            }
-            else if (startingBalance > 1000) {
-                // update the innerText of the div with id 'balanceMessage' to tell the user that their balance is too high
-                document.getElementById("balanceMessage").innerText = "Your entered amount is too high. \n Please enter an amount between 5 and 1000.";
-            }
-            else if (startingBalance < 5) {
-                // update the innerText of the div with id 'balanceMessage' to tell the user that their balance is too low
-                document.getElementById("balanceMessage").innerText = "Your entered amount is too low. \n Please enter an amount between 5 and 1000.";
-            }
-            else {
-                // set the value of the variable 'balance' to the value of the input with id 'inputBalance'
-                balance = Math.floor(startingBalance);
-                updateBalanceInfo();
-                // close the infoOverlay
-                closeTutorial();
-            }
+    });
+    // add an event listener to the input with id 'inputBalance' that calls the function inputChecker when enter key is pressed
+    document.querySelector("#inputBalance").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            inputChecker();
         }
     });
+
 }
 
 function displayBalancePrompt() {

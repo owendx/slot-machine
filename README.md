@@ -41,9 +41,9 @@ There are **9 symbols** that may appear in the reels when the slot machine is pl
 
 The slot machine is rendered on the page using a design powered by CSS Grid and Flexbox. The slot machine features 3 reels, each reel loaded with 9 symbols.
 
-When the page is first loaded, the buttons and reels are not initially active. The live console/info box prompts the user to enter their starting bet, via a prompt.
+When the page is first loaded, a tutorial sequence is played. After the tutorial sequence, the user is prompted to enter their starting balance via a number input on the screen.
 
-Once the user enters their starting bet, the slot machine become active, and the player's current balance is displayed. The player can now play the slot machine by clicking the 'SPIN' button. When the 'SPIN' button is pressed, the player's balance is deducted by the bet amount, and the 3 reels will begin to spin for a few seconds, gradually coming to a stop on a random symbol. If all 3 reels have matching symbols, the player's balance is credited in the amount of 10 times their current bet.
+Once the user enters their starting balance, the slot machine become active, and the player's current balance is displayed. The player can now play the slot machine by clicking the 'SPIN' button. When the 'SPIN' button is pressed, the player's balance is deducted by the bet amount, and the 3 reels will begin to spin for a few seconds, gradually coming to a stop on a random symbol. If all 3 reels have matching symbols, the player's balance is credited in the amount of 10 times their current bet.
 
 The player can cash out and redeem any winnings earned by clicking the 'CASHOUT' button. When the 'CASHOUT' button is pressed, the players balance plus any winnings are redeemed.
 
@@ -73,7 +73,7 @@ There are several features planned to be implemented to the slot machine in the 
 [Link to view wireframe on Whimsical: https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx](https://whimsical.com/olu-s-slot-machine-YQNJ3geosQsdeWZVZGAAdx)
  
 ### Game Flow 
-<img src="https://hedonic.life/wp-content/uploads/2022/07/slot-machine-game-flow-2.png" />
+<img src="https://hedonic.life/wp-content/uploads/2022/07/Slot-Machine-Game-Flow-3.png" />
 
 
 
