@@ -11,14 +11,22 @@ const wheelSFX = new Audio("assets/sound/wheel.mp3");
 const clickSFX = new Audio("assets/sound/click.wav");
 
 
+
+
 /*----- app's state (variables) -----*/
 let balance = 1000;
 let bet = 5;
 let winnings = 0;
 let cashout = 0;
 let autoPlayIsEnabled = false;
+let currentTutorialPage = 0;
 
-
+music.muted = true;
+music.loop = true;
+wheelSFX.muted = true;
+cashoutSFX.muted = true;
+jackpotSFX.muted = true;
+clickSFX.muted = true;
 
 /*----- cached element references -----*/
 
@@ -74,7 +82,6 @@ if (askUserForStartingBalance) {
     initialBalance();
 }
 
-
 // function that updates the div with id 'balance' to the current value of balance
 function updateBalanceInfo(){
     document.getElementById("balance").innerText = balance;
@@ -87,8 +94,6 @@ function setStartingScores() {
     document.getElementById("winnings").innerText = winnings;
 }
 setStartingScores()
-
-
 
 //create 3 divs with class slot-machine-window and append them to the div with class slot-machine
 function createSlotMachineReels() {
@@ -126,11 +131,11 @@ function createDisplaySets() {
 // attach the display sets to the windows
 createDisplaySets();
 
-// create 9 divs with class 'display' and append them to each div with class 'displaySet'
+// create 18 divs with class 'display' and append them to each div with class 'displaySet'
 function createDisplays() {
     const displaySets = document.getElementsByClassName("displaySet");
     for (let i = 0; i < displaySets.length; i++) {
-        for (let j = 0; j < 9; j++) {
+        for (let j = 0; j < 18; j++) {
             const display = document.createElement("div");
             display.className = `display display${j+1}`;
             // display.className = `display${j+1}`;
@@ -182,7 +187,7 @@ addRandomImages();
 function nudgeReel() {
     const slotMachineWindows = document.getElementsByClassName("slot-machine-window");
     // store the classes '.nudgeReelLow', '.nudgeReelMedium', and '.nudgeReelHigh' in an array
-    const nudgeReelSpeeds = ["nudgeReelLow", "nudgeReelMed", "nudgeReelHigh"];
+    const nudgeReelSpeeds = ["nudgeReelLow", "nudgeReelMed", "nudgeReelHigh", "nudgeReelDebug"];
 
     // assign a random index from nudgeReelSpeeds to a class on each div with class 'slot-machine-window'
     function assignNudgeReel() {
@@ -196,29 +201,38 @@ function nudgeReel() {
         // if this happens, it's impossible to win
         // first check if all values in the randomNumbers array are the same
         function allAreEqual(array) {
-            return array.every(function(element, index) {
+            return array.every(function (element, index) {
                 return element === array[0];
             });
         }
+
         if (allAreEqual(randomNumbers)) {
 
             // if the same speed is generated for all reels, we need to change the speed of the first reel to something else
             // we do this by replacing the value of the first element in the randomNumbers array
-            if ( randomNumbers[0] < 2 ) {
+            if (randomNumbers[0] < 2) {
                 randomNumbers[0] = randomNumbers[0] + 1;
-            }
-            else {
+            } else {
                 randomNumbers[0] = randomNumbers[0] - 1;
             }
+        } else {
         }
-        else {}
 
         // once a valid set of random numbers has been generated, go ahead and use these numbers as indexes to the nudgeReelSpeeds array
-        // to assign "nudgeReelLow","nudgeReelMed" or "nudgeReelHigh" to the div with class 'slot-machine-window'
-        for (j = 0; j < slotMachineWindows.length; j++) {
-            slotMachineWindows[j].classList.add(nudgeReelSpeeds[randomNumbers[j]]);
+        // to assign "nudgeReelLow","nudgeReelMed" or "nudgeReelHigh" to each div under the div with class 'displaySet'
+        let displaySets = document.getElementsByClassName("displaySet");
+        // loop through each displaySet and assign a random nudgeReelSpeed to each div with class 'displaySet'
+        for (s = 0; s < randomNumbers.length; s++) {
+            // loop through each displaySet and assign its divs to an array
+            let displaySetDivs = displaySets[s].getElementsByClassName("display");
+            // now assign the random nudgeReelSpeed to each div in the displaySetDivs array
+            for (d = 0; d < displaySetDivs.length; d++) {
+                displaySetDivs[d].classList.add(nudgeReelSpeeds[randomNumbers[s]]);
+            }
         }
+
     }
+
     assignNudgeReel();
 
     // on transitionend, run the function shiftDisplays()
@@ -226,6 +240,7 @@ function nudgeReel() {
         slotMachineWindows[i].addEventListener("transitionend", shiftDisplays);
     }
 }
+
 
 function shiftDisplaysBy3(displaySet) {
     // remap the innerHTML of each div with class 'display' to a corresponding div with class 'display' under the div with class 'displaySet'
@@ -247,6 +262,25 @@ function shiftDisplaysBy3(displaySet) {
     let display8 = displaySet.getElementsByClassName("display8")[0].innerHTML;
     // retrieve the innerHTML of div with class 'display9' under the div with class 'displaySet'
     let display9 = displaySet.getElementsByClassName("display9")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display10' under the div with class 'displaySet'
+    let display10 = displaySet.getElementsByClassName("display10")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display11' under the div with class 'displaySet'
+    let display11 = displaySet.getElementsByClassName("display11")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display12' under the div with class 'displaySet'
+    let display12 = displaySet.getElementsByClassName("display12")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display13' under the div with class 'displaySet'
+    let display13 = displaySet.getElementsByClassName("display13")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display14' under the div with class 'displaySet'
+    let display14 = displaySet.getElementsByClassName("display14")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display15' under the div with class 'displaySet'
+    let display15 = displaySet.getElementsByClassName("display15")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display16' under the div with class 'displaySet'
+    let display16 = displaySet.getElementsByClassName("display16")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display17' under the div with class 'displaySet'
+    let display17 = displaySet.getElementsByClassName("display17")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display18' under the div with class 'displaySet'
+    let display18 = displaySet.getElementsByClassName("display18")[0].innerHTML;
+
 
     // clear the innerHTML of each div with class 'display' under the div with class 'displaySet'
     displaySet.getElementsByClassName("display1")[0].innerHTML = "";
@@ -258,26 +292,57 @@ function shiftDisplaysBy3(displaySet) {
     displaySet.getElementsByClassName("display7")[0].innerHTML = "";
     displaySet.getElementsByClassName("display8")[0].innerHTML = "";
     displaySet.getElementsByClassName("display9")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display10")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display11")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display12")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display13")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display14")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display15")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display16")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display17")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display18")[0].innerHTML = "";
+
 
     // assign the innerHTML of each div with class 'display' under the div with class 'displaySet'
+    // assign the innerHTML of display9 to the innerHTML of div with class 'display6'
     displaySet.getElementsByClassName("display6")[0].innerHTML = display9;
-    // assign the innerText of display8 to the innerText of div with class 'display5'
+    // assign the innerHTML of display8 to the innerHTML of div with class 'display5'
     displaySet.getElementsByClassName("display5")[0].innerHTML = display8;
-    // assign the innerText of display7 to the innerText of div with class 'display4'
+    // assign the innerHTML of display7 to the innerHTML of div with class 'display4'
     displaySet.getElementsByClassName("display4")[0].innerHTML = display7;
-    // assign the innerText of display6 to the innerText of div with class 'display3'
+    // assign the innerHTML of display6 to the innerHTML of div with class 'display3'
     displaySet.getElementsByClassName("display3")[0].innerHTML = display6;
-    // assign the innerText of display5 to the innerText of div with class 'display2'
+    // assign the innerHTML of display5 to the innerHTML of div with class 'display2'
     displaySet.getElementsByClassName("display2")[0].innerHTML = display5;
-    // assign the innerText of display4 to the innerText of div with class 'display1'
+    // assign the innerHTML of display4 to the innerHTML of div with class 'display1'
     displaySet.getElementsByClassName("display1")[0].innerHTML = display4;
-    // assign the innerText of display3 to the innerText of div with class 'display9'
+    // assign the innerHTML of display3 to the innerHTML of div with class 'display9'
     displaySet.getElementsByClassName("display9")[0].innerHTML = display3;
-    // assign the innerText of display2 to the innerText of div with class 'display8'
+    // assign the innerHTML of display2 to the innerHTML of div with class 'display8'
     displaySet.getElementsByClassName("display8")[0].innerHTML = display2;
-    // assign the innerText of display1 to the innerText of div with class 'display7'
+    // assign the innerHTML of display1 to the innerHTML of div with class 'display7'
     displaySet.getElementsByClassName("display7")[0].innerHTML = display1;
+    // assign the innerHTML of display18 to the innerHTML of div with class 'display15'
+    displaySet.getElementsByClassName("display18")[0].innerHTML = display15
+    // assign the innerHTML of display17 to the innerHTML of div with class 'display14'
+    displaySet.getElementsByClassName("display17")[0].innerHTML = display14
+    // assign the innerHTML of display16 to the innerHTML of div with class 'display13'
+    displaySet.getElementsByClassName("display16")[0].innerHTML = display13
+    // assign the innerHTML of display15 to the innerHTML of div with class 'display12'
+    displaySet.getElementsByClassName("display15")[0].innerHTML = display12
+    // assign the innerHTML of display14 to the innerHTML of div with class 'display11'
+    displaySet.getElementsByClassName("display14")[0].innerHTML = display11
+    // assign the innerHTML of display13 to the innerHTML of div with class 'display10'
+    displaySet.getElementsByClassName("display13")[0].innerHTML = display10
+    // assign the innerHTML of display12 to the innerHTML of div with class 'display18'
+    displaySet.getElementsByClassName("display12")[0].innerHTML = display18
+    // assign the innerHTML of display11 to the innerHTML of div with class 'display17'
+    displaySet.getElementsByClassName("display11")[0].innerHTML = display17
+    // assign the innerHTML of display10 to the innerHTML of div with class 'display16'
+    displaySet.getElementsByClassName("display10")[0].innerHTML = display16
+
 }
+
 function shiftDisplaysBy5(displaySet) {
     // remap the innerHTML of each div with class 'display' to a corresponding div with class 'display' under the div with class 'displaySet'
     // retrieve the innerHTML of div with class 'display1' under the div with class 'displaySet'
@@ -298,6 +363,25 @@ function shiftDisplaysBy5(displaySet) {
     let display8 = displaySet.getElementsByClassName("display8")[0].innerHTML;
     // retrieve the innerHTML of div with class 'display9' under the div with class 'displaySet'
     let display9 = displaySet.getElementsByClassName("display9")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display10' under the div with class 'displaySet'
+    let display10 = displaySet.getElementsByClassName("display10")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display11' under the div with class 'displaySet'
+    let display11 = displaySet.getElementsByClassName("display11")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display12' under the div with class 'displaySet'
+    let display12 = displaySet.getElementsByClassName("display12")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display13' under the div with class 'displaySet'
+    let display13 = displaySet.getElementsByClassName("display13")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display14' under the div with class 'displaySet'
+    let display14 = displaySet.getElementsByClassName("display14")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display15' under the div with class 'displaySet'
+    let display15 = displaySet.getElementsByClassName("display15")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display16' under the div with class 'displaySet'
+    let display16 = displaySet.getElementsByClassName("display16")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display17' under the div with class 'displaySet'
+    let display17 = displaySet.getElementsByClassName("display17")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display18' under the div with class 'displaySet'
+    let display18 = displaySet.getElementsByClassName("display18")[0].innerHTML;
+
 
     // clear the innerHTML of each div with class 'display' under the div with class 'displaySet'
     displaySet.getElementsByClassName("display1")[0].innerHTML = "";
@@ -309,6 +393,15 @@ function shiftDisplaysBy5(displaySet) {
     displaySet.getElementsByClassName("display7")[0].innerHTML = "";
     displaySet.getElementsByClassName("display8")[0].innerHTML = "";
     displaySet.getElementsByClassName("display9")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display10")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display11")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display12")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display13")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display14")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display15")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display16")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display17")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display18")[0].innerHTML = "";
 
     // assign the innerText of display9 to the innerText of div with class 'display4'
     displaySet.getElementsByClassName("display4")[0].innerHTML = display9;
@@ -328,7 +421,27 @@ function shiftDisplaysBy5(displaySet) {
     displaySet.getElementsByClassName("display6")[0].innerHTML = display2;
     // assign the innerText of display1 to the innerText of div with class 'display5'
     displaySet.getElementsByClassName("display5")[0].innerHTML = display1;
+    // assign the innerText of display18 to the innerText of div with class 'display13'
+    displaySet.getElementsByClassName("display13")[0].innerHTML = display18;
+    // assign the innerText of display17 to the innerText of div with class 'display12'
+    displaySet.getElementsByClassName("display12")[0].innerHTML = display17;
+    // assign the innerText of display16 to the innerText of div with class 'display11'
+    displaySet.getElementsByClassName("display11")[0].innerHTML = display16;
+    // assign the innerText of display15 to the innerText of div with class 'display10'
+    displaySet.getElementsByClassName("display10")[0].innerHTML = display15;
+    // assign the innerText of display14 to the innerText of div with class 'display18'
+    displaySet.getElementsByClassName("display18")[0].innerHTML = display14;
+    // assign the innerText of display13 to the innerText of div with class 'display17'
+    displaySet.getElementsByClassName("display17")[0].innerHTML = display13;
+    // assign the innerText of display12 to the innerText of div with class 'display16'
+    displaySet.getElementsByClassName("display16")[0].innerHTML = display12;
+    // assign the innerText of display11 to the innerText of div with class 'display15'
+    displaySet.getElementsByClassName("display15")[0].innerHTML = display11;
+    // assign the innerText of display10 to the innerText of div with class 'display14'
+    displaySet.getElementsByClassName("display14")[0].innerHTML = display10;
 }
+
+
 function shiftDisplaysBy7(displaySet) {
     // remap the innerHTML of each div with class 'display' to a corresponding div with class 'display' under the div with class 'displaySet'
     // retrieve the innerHTML of div with class 'display1' under the div with class 'displaySet'
@@ -349,6 +462,25 @@ function shiftDisplaysBy7(displaySet) {
     let display8 = displaySet.getElementsByClassName("display8")[0].innerHTML;
     // retrieve the innerHTML of div with class 'display9' under the div with class 'displaySet'
     let display9 = displaySet.getElementsByClassName("display9")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display10' under the div with class 'displaySet'
+    let display10 = displaySet.getElementsByClassName("display10")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display11' under the div with class 'displaySet'
+    let display11 = displaySet.getElementsByClassName("display11")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display12' under the div with class 'displaySet'
+    let display12 = displaySet.getElementsByClassName("display12")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display13' under the div with class 'displaySet'
+    let display13 = displaySet.getElementsByClassName("display13")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display14' under the div with class 'displaySet'
+    let display14 = displaySet.getElementsByClassName("display14")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display15' under the div with class 'displaySet'
+    let display15 = displaySet.getElementsByClassName("display15")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display16' under the div with class 'displaySet'
+    let display16 = displaySet.getElementsByClassName("display16")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display17' under the div with class 'displaySet'
+    let display17 = displaySet.getElementsByClassName("display17")[0].innerHTML;
+    // retrieve the innerHTML of div with class 'display18' under the div with class 'displaySet'
+    let display18 = displaySet.getElementsByClassName("display18")[0].innerHTML;
+
 
     // clear the innerHTML of each div with class 'display' under the div with class 'displaySet'
     displaySet.getElementsByClassName("display1")[0].innerHTML = "";
@@ -360,65 +492,102 @@ function shiftDisplaysBy7(displaySet) {
     displaySet.getElementsByClassName("display7")[0].innerHTML = "";
     displaySet.getElementsByClassName("display8")[0].innerHTML = "";
     displaySet.getElementsByClassName("display9")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display10")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display11")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display12")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display13")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display14")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display15")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display16")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display17")[0].innerHTML = "";
+    displaySet.getElementsByClassName("display18")[0].innerHTML = "";
 
-    // assign the innerText of display9 to the innerText of div with class 'display2'
+    // assign the innerHTML of display18 to the innerHTML of div with class 'display11'
+    displaySet.getElementsByClassName("display11")[0].innerHTML = display18;
+    // assign the innerHTML of display17 to the innerHTML of div with class 'display12'
+    displaySet.getElementsByClassName("display10")[0].innerHTML = display17;
+    // assign the innerHTML of display16 to the innerHTML of div with class 'display9'
+    displaySet.getElementsByClassName("display9")[0].innerHTML = display16;
+    // assign the innerHTML of display15 to the innerHTML of div with class 'display8'
+    displaySet.getElementsByClassName("display8")[0].innerHTML = display15;
+    // assign the innerHTML of display14 to the innerHTML of div with class 'display7'
+    displaySet.getElementsByClassName("display7")[0].innerHTML = display14;
+    // assign the innerHTML of display13 to the innerHTML of div with class 'display6'
+    displaySet.getElementsByClassName("display6")[0].innerHTML = display13;
+    // assign the innerHTML of display12 to the innerHTML of div with class 'display5'
+    displaySet.getElementsByClassName("display5")[0].innerHTML = display12;
+    // assign the innerHTML of display11 to the innerHTML of div with class 'display4'
+    displaySet.getElementsByClassName("display4")[0].innerHTML = display11;
+    // assign the innerHTML of display10 to the innerHTML of div with class 'display3'
+    displaySet.getElementsByClassName("display3")[0].innerHTML = display10;
+    // assign the innerHTML of display9 to the innerHTML of div with class 'display2'
     displaySet.getElementsByClassName("display2")[0].innerHTML = display9;
-    // assign the innerText of display8 to the innerText of div with class 'display1'
+    // assign the innerHTML of display8 to the innerHTML of div with class 'display1'
     displaySet.getElementsByClassName("display1")[0].innerHTML = display8;
-    // assign the innerText of display7 to the innerText of div with class 'display9'
-    displaySet.getElementsByClassName("display9")[0].innerHTML = display7;
-    // assign the innerText of display6 to the innerText of div with class 'display8'
-    displaySet.getElementsByClassName("display8")[0].innerHTML = display6;
-    // assign the innerText of display5 to the innerText of div with class 'display7'
-    displaySet.getElementsByClassName("display7")[0].innerHTML = display5;
-    // assign the innerText of display4 to the innerText of div with class 'display6'
-    displaySet.getElementsByClassName("display6")[0].innerHTML = display4;
-    // assign the innerText of display3 to the innerText of div with class 'display5'
-    displaySet.getElementsByClassName("display5")[0].innerHTML = display3;
-    // assign the innerText of display2 to the innerText of div with class 'display4'
-    displaySet.getElementsByClassName("display4")[0].innerHTML = display2;
-    // assign the innerText of display1 to the innerText of div with class 'display3'
-    displaySet.getElementsByClassName("display3")[0].innerHTML = display1;
+    // assign the innerHTML of display7 to the innerHTML of div with class 'display18'
+    displaySet.getElementsByClassName("display18")[0].innerHTML = display7;
+    // assign the innerHTML of display6 to the innerHTML of div with class 'display17'
+    displaySet.getElementsByClassName("display17")[0].innerHTML = display6;
+    // assign the innerHTML of display5 to the innerHTML of div with class 'display16'
+    displaySet.getElementsByClassName("display16")[0].innerHTML = display5;
+    // assign the innerHTML of display4 to the innerHTML of div with class 'display15'
+    displaySet.getElementsByClassName("display15")[0].innerHTML = display4;
+    // assign the innerHTML of display3 to the innerHTML of div with class 'display14'
+    displaySet.getElementsByClassName("display14")[0].innerHTML = display3;
+    // assign the innerHTML of display2 to the innerHTML of div with class 'display13'
+    displaySet.getElementsByClassName("display13")[0].innerHTML = display2;
+    // assign the innerHTML of display1 to the innerHTML of div with class 'display12'
+    displaySet.getElementsByClassName("display12")[0].innerHTML = display1;
 }
+
 
 // after a nudgeReel is called, trigger the appropriate shiftDisplays function depending on which
 // nudgeReelSpeed is assigned to the parent div with class 'slot-machine-window'
 function shiftDisplays() {
     const slotMachineWindows = document.getElementsByClassName("slot-machine-window");
     for (let i = 0; i < slotMachineWindows.length; i++) {
-        if (slotMachineWindows[i].classList.contains("nudgeReelLow")) {
+        // check if the children of the children of the parent div with class 'slot-machine-window' contain the class 'nudgeReelLow'
+        if (slotMachineWindows[i].children[0].children[0].classList.contains("nudgeReelLow")) {
             shiftDisplaysBy3(slotMachineWindows[i].getElementsByClassName("displaySet")[0]);}
-        else if (slotMachineWindows[i].classList.contains("nudgeReelMed")) {
+        else if (slotMachineWindows[i].children[0].children[0].classList.contains("nudgeReelMed")) {
             shiftDisplaysBy5(slotMachineWindows[i].getElementsByClassName("displaySet")[0]);}
-        else if (slotMachineWindows[i].classList.contains("nudgeReelHigh")) {
+        else if (slotMachineWindows[i].children[0].children[0].classList.contains("nudgeReelHigh")) {
             shiftDisplaysBy7(slotMachineWindows[i].getElementsByClassName("displaySet")[0]);}
     }
     removeNudgeReelClasses()
 }
 
-// add class .resetPosition to each div with class 'slot-machine-window'
-function resetPosition() {
-    let i;
-    let slotMachineWindows = document.getElementsByClassName("slot-machine-window");
-    for (i = 0; i < slotMachineWindows.length; i++) {
-        slotMachineWindows[i].classList.add("resetPosition");
-    }
-    // on transitionend, remove the class 'resetPosition' from each div with class 'slot-machine-window'
-    for (i = 0; i < slotMachineWindows.length; i++) {
-        slotMachineWindows[i].addEventListener("transitionend", function() {
-            this.classList.remove("resetPosition");
-        })
+
+// we need to 'reset' the animation of each div by removing any classes that are added by the nudgeReel function
+function removeNudgeReelClasses() {
+    const allDisplays = document.getElementsByClassName("display");
+    for (let i = 0; i < allDisplays.length; i++) {
+        allDisplays[i].classList.remove("nudgeReelLow");
+        allDisplays[i].classList.remove("nudgeReelMed");
+        allDisplays[i].classList.remove("nudgeReelHigh");
+        allDisplays[i].classList.remove("nudgeReelDebug");
     }
 }
 
-function removeNudgeReelClasses() {
-    const slotMachineWindows = document.getElementsByClassName("slot-machine-window");
-    for (let i = 0; i < slotMachineWindows.length; i++) {
-        slotMachineWindows[i].classList.remove("nudgeReelLow");
-        slotMachineWindows[i].classList.remove("nudgeReelMed");
-        slotMachineWindows[i].classList.remove("nudgeReelHigh");
-        slotMachineWindows[i].classList.remove("resetPosition");
-    }
+// display jackpot alert
+function displayJackpotAlert() {
+    // change the opacity of the div with id 'container' to 0.1
+    document.getElementById("container").style.opacity = 0.1;
+    document.getElementById("container").style.filter = "brightness(opacity=20)";
+
+    // retrieve the img with id 'jackpotHidden', and change its id to 'jackpotDisplayed'
+    const jackpotHidden = document.getElementById("jackpotHidden");
+    jackpotHidden.id = "jackpotDisplayed";
+
+    // after 2 seconds, change the id of the img with id 'jackpotDisplayed' to 'jackpotHidden'
+    setTimeout(function() {
+        jackpotHidden.id = "jackpotHidden";
+    }, 2000);
+    // change the opacity of the div with id 'container' back to 1
+    setTimeout(function() {
+        document.getElementById("container").style.opacity = 1;
+        document.getElementById("container").style.filter = "brightness(opacity=100)";
+    }, 2000);
 }
 
 // function that updates the scores on info box and updates the credit balance
@@ -481,31 +650,7 @@ function checkMatch(){
     for (i = 0; i < rows.length; i++) {
         if (checkSame(rows[i])) {
             playJackpotSFX();
-            console.log('JACKPOT!')
-
-
-            // change the opacity of the div with id 'container' to 0.1
-            document.getElementById("container").style.opacity = 0.1;
-            // retrieve the img with id 'jackpotHidden', and change its id to 'jackpotDisplayed'
-            const jackpotHidden = document.getElementById("jackpotHidden");
-            jackpotHidden.id = "jackpotDisplayed";
-
-
-            // after 2 seconds, change the id of the img with id 'jackpotDisplayed' to 'jackpotHidden'
-            setTimeout(function() {
-                jackpotHidden.id = "jackpotHidden";
-            }, 2000);
-            // change the opacity of the div with id 'container' back to 1
-            setTimeout(function() {
-                document.getElementById("container").style.opacity = 1;
-            }, 2000);
-
-
-
-
-
-
-
+            displayJackpotAlert();
             creditWinnings()
         }
     }
@@ -515,25 +660,46 @@ function checkMatch(){
 function displayInfo() {
     // change the opacity of the div with id 'container' to 0.1
     document.getElementById("container").style.opacity = 0.1;
+    document.getElementById("container").style.filter = "brightness(opacity=20)";
+
     // retrieve the div with id 'infoOverlay', and change its id to 'infoOverlayDisplayed'
     let infoOverlayHidden = document.getElementById("infoOverlayHidden");
     infoOverlayHidden.id = "infoOverlayDisplayed";
 
+    // if autoPlay is enabled, info message will be displayed for 5 seconds
+    if (autoPlayIsEnabled) {
+        // after 2 seconds, change the id of the img with id 'infoOverlayDisplayed' back to 'infoOverlayHidden'
+        setTimeout(function() {
+            infoOverlayHidden.id = "infoOverlayHidden";
+        }, 7000);
+        // change the opacity of the div with id 'container' back to 1
+        setTimeout(function() {
+            document.getElementById("container").style.opacity = 1;
+            document.getElementById("container").style.filter = "brightness(opacity=100)";
+        }, 7000);
+        // after 7 seconds, change the innerText value of the div with id 'infoOverlayDisplayed' to ' '
+        setTimeout(function() {
+            document.getElementById("infoOverlayHidden").innerText = " ";
+        }, 7000);
+    }
 
-    // after 2 seconds, change the id of the img with id 'infoOverlayDisplayed' back to 'infoOverlayHidden'
-    setTimeout(function() {
-        infoOverlayHidden.id = "infoOverlayHidden";
-    }, 7000);
-    // change the opacity of the div with id 'container' back to 1
-    setTimeout(function() {
-        document.getElementById("container").style.opacity = 1;
-    }, 7000);
-    // after 7 seconds, change the innerText value of the div with id 'infoOverlayDisplayed' to ' '
-    setTimeout(function() {
-        document.getElementById("infoOverlayHidden").innerText = " ";
-    }, 7000);
-
+    else {
+        // if autoPlay is not enabled, info message will be displayed until the user clicks the screen
+        // add an event listener to the div with id 'infoOverlayDisplayed' that listens for a click event
+        infoOverlayHidden.addEventListener("click", function() {
+            // change the id of the div with id 'infoOverlayDisplayed' to 'infoOverlayHidden'
+            infoOverlayHidden.id = "infoOverlayHidden";
+            // change the opacity of the div with id 'container' back to 1
+            document.getElementById("container").style.opacity = 1;
+            document.getElementById("container").style.filter = "brightness(opacity=100)";
+            // change the innerText value of the div with id 'infoOverlayHidden' to ''
+            document.getElementById("infoOverlayHidden").innerText = "";
+        })
+    }
 }
+
+
+
 // increase bet by 5
 function increaseBet(){
     // if user tries to increase bet to more than their current balance, alert them
@@ -611,7 +777,6 @@ function play() {
         // call the function that spins the wheel!
         startSpinWheelAnimation()
 
-
         // run checkMatch function 2.1 seconds after nudgeReel function is finished
         setTimeout(checkMatch, 2050);
 
@@ -621,7 +786,7 @@ function play() {
 // function that toggles autoPlayIsEnabled between true and false
 function toggleAutoPlay() {
     autoPlayIsEnabled = !autoPlayIsEnabled;
-    console.log(`autoPlayIsEnabled: ${autoPlayIsEnabled}`);
+
 }
 
 // run play function every 2.4 seconds if autoPlayIsEnabled is true
@@ -694,14 +859,6 @@ function endSpinWheelAnimation() {
 }
 endSpinWheelAnimation()
 
-music.muted = true;
-music.loop = true;
-wheelSFX.muted = true;
-cashoutSFX.volume = 0.50;
-jackpotSFX.volume = 0.40;
-
-
-
 function musicAndSoundListener() {
     // add an eventlistener that checks if the user has clicked the button with id 'music'
     document.getElementById("music").addEventListener("click", function() {
@@ -709,6 +866,10 @@ function musicAndSoundListener() {
         if (music.muted) {
             // if true, unmute music
             music.muted = false;
+
+            // then set the volume to the music
+            music.volume = 0.2;
+
             // call music play
             music.play();
             // change the src of the img with id 'music' to the src of the img with name 'musicoff
@@ -736,6 +897,12 @@ function musicAndSoundListener() {
             jackpotSFX.muted = false;
             clickSFX.muted = false;
 
+            // then set the volume of the sounds
+            wheelSFX.volume = 0.1;
+            cashoutSFX.volume = 0.3;
+            jackpotSFX.volume = 0.2;
+            clickSFX.volume = 0.3;
+
             // change the src of the img with id 'sound' to the src of the img with name 'soundoff
             document.getElementById("sound").src = "assets/slotmachineframe/soundoff.svg";
         }
@@ -750,8 +917,6 @@ function musicAndSoundListener() {
             document.getElementById("sound").src = "assets/slotmachineframe/soundon.svg";
         }
     })
-
-
 }
 musicAndSoundListener()
 
@@ -776,9 +941,116 @@ function playJackpotSFX() {
 }
 
 
+// call displayTutorial on window load
+window.onload = displayTutorial;
+
+function closeTutorial() {
+    // change the id of the img with id 'infoOverlayDisplayed' back to 'infoOverlayHidden'
+    let infoOverlayDisplayed = document.getElementById("infoOverlayDisplayed");
+    infoOverlayDisplayed.id = "infoOverlayHidden";
+
+    // change the opacity of the div with id 'container' back to 1
+    document.getElementById("container").style.opacity = 1;
+    document.getElementById("container").style.filter = "brightness(opacity=20)";
+
+    // change the innerText value of the div with id 'infoOverlayDisplayed' to ' '
+    document.getElementById("infoOverlayHidden").innerText = " ";
+}
 
 
+function displayTutorial() {
 
+    const feelingLucky = '<div class="tutorialPage"><div class="infoText">Ahoy Matey! Feeling lucky?</div><div class="tutorialmainui"></div></div>';
+    const tutorialSpin = '<div class="tutorialPage"><div class="infoText">Press spin to play the slot machine. Press autoplay to have the slots play automatically.</div><div class="tutorialspin"></div></div>';
+    const tutorialBet = '<div class="tutorialPage"><div class="infoText">Use the up and down buttons to increase or lower your bet. Press max bet to automatically increase your bet to your current balance.</div><div class="tutorialbet"></div></div>';
+    const tutorialWin = '<div class="tutorialPage"><div class="infoText">Your current winnings is displayed. The amount won on every jackpot is in the amount of <b>10 times your current bet</b>. </div><div class="tutorialwin"></div></div>';
+    const tutorialBalance = '<div class="tutorialPage"><div class="infoText">Your current balance is displayed. Every time you hit a jackpot, your winnings are added to your total balance.</div><div class="tutorialbalance"></div></div>';
+    const tutorialCashout = '<div class="tutorialPage"><div class="infoText">Press the "cashout" button when you are ready to redeem your total balance and end your play session!</div><div class="tutorialcashout"></div></div>';
+    const tutorialSound = '<div class="tutorialPage"><div class="infoText">Toggle music and sound effects off with these buttons.</div><div class="tutorialmusic"></div></div>';
+
+    let tutorialSteps = [feelingLucky, tutorialSpin, tutorialBet, tutorialWin, tutorialBalance, tutorialCashout, tutorialSound];
+
+    let currentTutorialPage = 0;
+
+    // change the opacity of the div with id 'container' to 0.1
+    document.getElementById("container").style.opacity = 0.1;
+    document.getElementById("container").style.filter = "brightness(opacity=20)";
+
+
+    // retrieve the div with id 'infoOverlay', and change its id to 'infoOverlayDisplayed'
+    let infoOverlayHidden = document.getElementById("infoOverlayHidden");
+    infoOverlayHidden.id = "infoOverlayDisplayed";
+
+    // appendChild the html of the first tutorial step to the div with id 'infoOverlayDisplayed
+    document.getElementById("infoOverlayDisplayed").appendChild(document.createRange().createContextualFragment(tutorialSteps[0]));
+        // set the display of the div with id 'previous' to none
+        document.getElementById("previous").style.display = "none";
+    // move the div with id 'tutorialButtons' to the bottom of the div with id 'infoOverlayDisplayed'
+    document.getElementById("infoOverlayDisplayed").appendChild(document.getElementById("tutorialButtons"));
+
+    // attach an event listener to the img with id 'next' that removes the div with class 'tutorialPage' and from the
+    // div with id 'infoOverlayDisplayed' and appends the next item in the tutorialSteps array to the div with id 'infoOverlayDisplayed'
+    document.getElementById("next").addEventListener("click", function() {
+        currentTutorialPage++;
+
+        // replace the innerHTML of the div with class 'tutorialPage' with the html of the next tutorial step
+        // from the tutorialSteps array
+        document.querySelector(".tutorialPage").innerHTML = tutorialSteps[currentTutorialPage];
+
+        if (currentTutorialPage === 0) {
+            // set the display of the div with id 'previous' to none
+            document.getElementById("previous").style.display = "none";
+    }
+        else if (currentTutorialPage > 0 || currentTutorialPage < tutorialSteps.length) {
+            // set the display of the div with id 'previous' to inline
+            document.getElementById("previous").style.display = "inline";
+        }
+
+         if (currentTutorialPage === 6) {
+            // set the src of the img with id 'next' to the src of the img with name 'play.svg'
+            document.getElementById("next").src = "assets/imgs/tutorial/play.svg";
+
+        }
+         else {
+            // set the src of the img with id 'next' to the src of the img with name 'next.svg'
+            document.getElementById("next").src = "assets/imgs/tutorial/next.svg";
+        }
+
+         if (currentTutorialPage === tutorialSteps.length) {
+             // close the tutorial when next is clicked on the last tutorial page
+                closeTutorial();
+         }
+
+        // currentTutorialPage++;
+    });
+
+    // attach an event listener to the img with id 'previous' that removes the div with class 'tutorialPage' and from the
+    // div with id 'infoOverlayDisplayed' and appends the previous item in the tutorialSteps array to the div with id 'infoOverlayDisplayed'
+    document.getElementById("previous").addEventListener("click", function() {
+        currentTutorialPage--;
+        // replace the innerHTML of the div with class 'tutorialPage' with the html of the previous tutorial step
+        // from the tutorialSteps array
+        document.querySelector(".tutorialPage").innerHTML = tutorialSteps[currentTutorialPage];
+
+        if (currentTutorialPage === 0) {
+            // set the display of the div with id 'previous' to none
+            document.getElementById("previous").style.display = "none";
+        }
+        else if (currentTutorialPage > 0 || currentTutorialPage < tutorialSteps.length) {
+            // set the display of the div with id 'previous' to inline
+            document.getElementById("previous").style.display = "inline";
+        }
+
+        if (currentTutorialPage === 6) {
+            // set the src of the img with id 'next' to the src of the img with name 'play.svg'
+            document.getElementById("next").src = "assets/imgs/tutorial/play.svg";
+        }
+        else {
+            // set the src of the img with id 'next' to the src of the img with name 'next.svg'
+            document.getElementById("next").src = "assets/imgs/tutorial/next.svg";
+        }
+    });
+}
 
 
 
