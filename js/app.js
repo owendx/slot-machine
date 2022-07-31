@@ -966,7 +966,7 @@ function displayTutorial() {
     const tutorialWin = '<div class="tutorialPage"><div class="infoText">Your current winnings is displayed. The amount won on every jackpot is in the amount of <b>10 times your current bet</b>. </div><div class="tutorialwin"></div></div>';
     const tutorialBalance = '<div class="tutorialPage"><div class="infoText">Your current balance is displayed. Every time you hit a jackpot, your winnings are added to your total balance.</div><div class="tutorialbalance"></div></div>';
     const tutorialCashout = '<div class="tutorialPage"><div class="infoText">Press the "cashout" button when you are ready to redeem your total balance and end your play session!</div><div class="tutorialcashout"></div></div>';
-    const tutorialSound = '<div class="tutorialPage"><div class="infoText">Toggle music and sound effects off with these buttons.</div><div class="tutorialmusic"></div></div>';
+    const tutorialSound = '<div class="tutorialPage"><div class="infoText">Toggle music and sound effects off with these buttons.<br>Press "PLAY" below to begin playing!</div><div class="tutorialmusic"></div></div>';
 
     let tutorialSteps = [feelingLucky, tutorialSpin, tutorialBet, tutorialWin, tutorialBalance, tutorialCashout, tutorialSound];
 
