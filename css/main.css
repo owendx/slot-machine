@@ -269,13 +269,13 @@ img#spinWheel {
 
 #spinWheel:active {
     position:relative;
-    top:4px;
+    top:-46px;
     cursor: pointer;
 }
 
 #spinWheel {;
     position: relative;
-    top: -7px;
+    top: -50px;
 
 }
 
