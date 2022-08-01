@@ -35,6 +35,8 @@ clickSFX.muted = true;
 
 /*----- event listeners -----*/
 
+// add a click event listener to the img with 'id' spinWheel that calls the play function
+document.getElementById("spinWheel").addEventListener("click", play);
 
 //add an event listener to the 'autoPlay' button that calls toggleAutoPlay when clicked
 document.getElementById("autoplay").addEventListener("click", toggleAutoPlay);
@@ -50,6 +52,11 @@ document.getElementById("decreaseBet").addEventListener("click", decreaseBet);
 
 // add an event listener to the 'cashout' button that calls cashOut when clicked
 document.getElementById("cashout").addEventListener("click", cashOut);
+
+// attach setMaxBet() as a click eventlistener to the button with id 'maxbet'
+document.getElementById("maxbet").addEventListener("click", setMaxBet);
+
+
 
 // attach click event listeners to autoplay, increasebet, decreasebet, cashout, musicon, musicoff, soundon, soundoff buttons
 // to play sound when clicked
@@ -68,6 +75,22 @@ document.getElementById("sound").addEventListener("click", playClickSFX);
 // function that updates the div with id 'balance' to the current value of balance
 function updateBalanceInfo(){
     document.getElementById("balance").innerText = balance;
+}
+
+function cashoutButtonToggle(){
+    // if balance is 0, disable the 'cashout' button
+    if (balance === 0) {
+        // change the id of the img with id 'cashout' to 'cashout-disabled'
+        document.getElementById("cashout").id = "cashoutDisabled";
+        // remove the event listener from the 'cashout' button
+        document.getElementById("cashoutDisabled").removeEventListener("click", cashOut);
+    }
+    // if balance is not 0, enable the 'cashout' button by changing the id of the img with id 'cashoutDisabled' back to 'cashout'
+    else {
+        document.getElementById("cashoutDisabled").id = "cashout";
+        // add the click event listener back to the 'cashout' button
+        document.getElementById("cashout").addEventListener("click", cashOut);
+    }
 }
 
 // set the innerText of divs in .infoConsole to their starting values
@@ -481,6 +504,7 @@ function checkMatch(){
         }
     }
     checkBalanceUnder5()
+    cashoutButtonToggle()
 }
 
 function displayInfo() {
@@ -642,10 +666,11 @@ function autoPlay() {
 
 // cashout function to add the current value of winnings to the balance
 function cashOut() {
+    // disable all buttons
+    disableAllButtons()
+
     playCashoutSFX();
     cashout = balance;
-
-    //alert the user the amount of money they have won
 
     // update the innerText value of infoOverlayHidden
     document.getElementById("infoOverlayHidden").innerText = `You have won $${winnings} \n You have cashed out a total of $${cashout}`;
@@ -657,16 +682,49 @@ function cashOut() {
     document.getElementById("winnings").innerText = winnings;
     balance = 0;
     document.getElementById("balance").innerText = balance;
+
+
 }
 
 // check if balance is < 5 and if so, update the info div with a message telling the user to cash out
 function checkBalanceUnder5() {
-    if (balance < 5) {
+    if (balance < 5 && balance > 0) {
         // prompt the user to cash out
         // update the innerText value of infoOverlayHidden
         document.getElementById("infoOverlayHidden").innerText = `You have less than $5 in your balance. Please cash out now. Thank you!`;
         displayInfo();
     }
+    else if (balance === 0) {
+        // prompt the user thank you for playing, you have no credits left
+        // update the innerText value of infoOverlayHidden
+        document.getElementById("infoOverlayHidden").innerText = `You have no balance left. Thank you for playing!`;
+        displayInfo();
+        disableAllButtons()
+    }
+
+}
+
+function disableAllButtons(){
+    // remove all event listeners from the buttons, images and divs on the page
+    document.getElementById("spinWheel").removeEventListener("click", play);
+    document.getElementById("increaseBet").removeEventListener("click", increaseBet);
+    document.getElementById("decreaseBet").removeEventListener("click", decreaseBet);
+    document.getElementById("cashout").removeEventListener("click", cashOut);
+    document.getElementById("autoplay").removeEventListener("click", toggleAutoPlay);
+    document.getElementById("maxbet").removeEventListener("click", setMaxBet);
+
+    // add the disabled class to the buttons
+    document.getElementById("spinWheel").classList.add("disabled");
+    document.getElementById("increaseBet").classList.add("disabled");
+    document.getElementById("decreaseBet").classList.add("disabled");
+    document.getElementById("cashout").classList.add("disabled");
+    document.getElementById("autoplay").classList.add("disabled");
+    document.getElementById("maxbet").classList.add("disabled");
+
+    // change the id of the #cashout to 'cashoutDisabled'
+    document.getElementById("cashout").id = "cashoutDisabled";
+
+
 }
 
 // set bet to the current value of balance
@@ -684,11 +742,7 @@ function setMaxBet() {
 
 }
 
-// attach setMaxBet() as a click eventlistener to the button with id 'maxbet'
-document.getElementById("maxbet").addEventListener("click", setMaxBet);
 
-// add a click event listener to the img with 'id' spinWheel that calls the play function
-document.getElementById("spinWheel").addEventListener("click", play);
 
 function startSpinWheelAnimation(){
     document.getElementById("spinWheel").classList.add("spinning");
