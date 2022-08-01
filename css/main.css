@@ -100,14 +100,6 @@ body {
     width: 75px;
 }
 
-#betBox {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-}
-
 #autoplay {
     font-size: 25px;
 }
@@ -197,17 +189,14 @@ body {
     align-items: center;
     display: flex;
     justify-items: center;
-
-}
-
-.betBox {
     height: 100px;
 }
+
 
 .betButtonsBox {
     left: -40px;
     position: relative;
-    top: -10px;
+    top: -7px;
 }
 
 img#spinWheel {
@@ -221,7 +210,7 @@ img#spinWheel {
 
 #winnings {
     position: relative;
-    right: 125px;
+    right: 142px;
     width: 75px;
 }
 
@@ -396,6 +385,10 @@ img#spinWheel {
 
 .disabled:hover {
     cursor: not-allowed;
+}
+
+#totalBet, #win, #balanceWindow {
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.5));
 }
 
 
